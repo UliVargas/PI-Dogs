@@ -1,0 +1,11 @@
+.nav {
+    background-color: #c37d28;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.logo{
+    width: 10rem;
+    margin: 0px;
+}

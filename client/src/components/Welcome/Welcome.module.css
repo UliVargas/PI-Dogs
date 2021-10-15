@@ -1,0 +1,38 @@
+.container {
+    max-width: 90rem;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.Welcome {
+    border-radius: .5rem;
+    background-color: #00000020;
+    height: 40rem;
+    color: #FFFFFF;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+}
+.Welcome h1 {
+    margin: 0px;
+}
+
+.Welcome button {
+    border-radius: .5rem;
+    background-color: #c37d28;
+    color: rgb(236, 235, 235);
+    border: none;
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 1rem 4rem;
+    transition: all ease-in-out .2s;
+}
+
+.Welcome button:hover {
+    background-color: #583b1e;
+    color: #FFFFFF;
+}
