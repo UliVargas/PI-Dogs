@@ -1,8 +1,13 @@
-.nav {
+.container {
     background-color: #c37d28;
+}
+
+.nav {
+    margin: 0 auto;
+    max-width: 120rem;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .logo{

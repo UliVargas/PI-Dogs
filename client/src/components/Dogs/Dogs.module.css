@@ -1,0 +1,14 @@
+.container {
+    text-align: center;
+    margin-top: 3rem;
+    color: #FFFFFF;
+    height: 100vh;
+}
+
+.containerDogs {
+    margin: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 30rem);
+    gap: 3rem;
+    justify-content: center;
+}

@@ -1,0 +1,14 @@
+.formContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.container {
+    text-align: center;
+    padding: 0 2rem
+}
+
+.container p {
+    margin: 0;
+    margin: .5rem;
+}

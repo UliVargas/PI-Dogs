@@ -1,0 +1,27 @@
+.container {
+    padding-top: 1rem;
+}
+
+.container:hover {
+    background-color: #583b1e;
+}
+
+.container:hover .details {
+    visibility: visible;
+}
+
+.container img {
+    max-width: 25rem;
+    height: 15rem;
+    text-align: center;
+}
+
+.details {
+    visibility: hidden;
+}
+
+
+
+.details li{
+    margin: 1rem;
+}

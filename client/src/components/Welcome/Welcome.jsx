@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom'
-import styles from './Welcome.module.css'
+import { Link } from 'react-router-dom';
+import styles from './Welcome.module.css';
+
 
 export function Welcome() {
+
     return (
         <section className={`${styles.container}`}>
             <div className={`${styles.Welcome}`}>

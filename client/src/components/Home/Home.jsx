@@ -1,12 +1,16 @@
 import { Footer } from '../Footer/Footer';
 import { Nav } from '../NavBar/NavBar';
 import styles from './Home.module.css';
+import Dogs from "../Dogs/Dogs";
 
 export function Home() {
+
+
     return (
         <div className={styles.home}>
-            <Nav />
-            <Footer />
+            <Nav/>
+            <Dogs />
+            <Footer/>
         </div>
     )
 }

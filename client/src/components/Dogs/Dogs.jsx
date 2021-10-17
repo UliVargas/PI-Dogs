@@ -1,36 +1,53 @@
-import React from "react";
-import { connect } from "react-redux";
-import Dog from "./DogCard/Dog";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Dog} from "./Dog";
+import {Pagination} from "../Pagination/Pagination";
+import styles from './Dogs.module.css';
+import {getAllDogs} from "../../actions";
 
-export function Dogs(breed) {
- 
-  return (<div>
-    
-  
-    <div id="dogsBox">
-      {breed.breed.map(dog =>(
-          <Dog 
-          name = {dog.name}
-          img = {dog.img}
-          temperaments = {dog.temperaments?.split(", ")}
-          id = {dog.id}
-          key = {dog.id}
-          />
-          
-          ))
-        }
-      
-    </div>
-    
-  </div>)
-};
+const Dogs = () => {
+
+    const dispatch = useDispatch();
+    const results = useSelector(state => state);
+    const breeds = results.breeds;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [dogsPerPage] = useState(8);
+
+    //Llamado a la API
+    useEffect(() => {
+        dispatch(getAllDogs())
+    }, [])
 
 
-function mapStateToprops(state){
-    return{
-        breed: state,
-    };
-};
+    //Paginado
 
+    const indexOfLastDogs = currentPage * dogsPerPage;
+    const indexOfFirstDogs = indexOfLastDogs - dogsPerPage;
+    const currentDogs = breeds.slice(indexOfFirstDogs, indexOfLastDogs);
+//Cambio de pagina
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
-export default connect(mapStateToprops, null)(Dogs);
+    return (
+        <div className={styles.container}>
+            <div>
+                <h2>Razas</h2>
+            </div>
+            <div className={styles.containerDogs}>
+                {
+                    currentDogs.map(dog => (
+                        <Dog name={dog.name}
+                             temperaments={dog.temperaments}
+                             weight={dog.weight}
+                             img={dog.img}
+                             key={dog.id}
+                             id={dog.id}
+                        />
+                    ))
+                }
+            </div>
+            <Pagination dogsPerPage={dogsPerPage} totalDogs={breeds.length} paginate={paginate}/>
+        </div>
+    )
+}
+
+export default (Dogs);

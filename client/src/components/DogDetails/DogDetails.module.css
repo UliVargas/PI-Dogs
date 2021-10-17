@@ -1,0 +1,23 @@
+.container{
+    background-color: #252223;
+    text-align: center;
+    padding-top: 4rem;
+    margin-bottom: 5rem;
+}
+
+.containerDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+img {
+    width: 60rem;
+    flex: 0 0 60%
+}
+
+.details {
+    margin-bottom: 20rem;
+    flex: 0 0 calc(40% - 2rem);
+}
+
