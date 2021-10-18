@@ -1,6 +1,6 @@
 import styles from "./Order.module.css"
 
-export function Order() {
+const Order = () => {
   return (
       <div>
           <form action="" className={styles.formContainer}>
@@ -30,3 +30,5 @@ export function Order() {
       </div>
   )
 };
+
+export default Order;

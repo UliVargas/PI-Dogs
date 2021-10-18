@@ -1,7 +1,8 @@
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {Switch, Route} from "react-router-dom";
 import DogDetails from "./components/DogDetails/DogDetails";
-import { Home } from "./components/Home/Home";
-import { Welcome } from "./components/Welcome/Welcome";
+import Home from "./components/Home/Home";
+import Welcome  from "./components/Welcome/Welcome";
+import AddDog from "./components/AddDog/AddDog";
 
 
 
@@ -9,13 +10,15 @@ import { Welcome } from "./components/Welcome/Welcome";
 function App() {
 
   return (
-    
-    <Router>
       <div>
         <Switch>
+          <Route exact path={"/dog/add"}>
+            <AddDog />
+          </Route>
           <Route exact path='/dog/:id'>
             <DogDetails />
           </Route>
+
           <Route exact path="/">
             <Welcome />
           </Route>
@@ -24,7 +27,6 @@ function App() {
           </Route>
         </Switch>
       </div>
-    </Router>
   );
 }
 

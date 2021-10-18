@@ -1,7 +1,7 @@
 import styles from "./Pagination.module.css"
 
 
-export function Pagination({dogsPerPage, totalDogs, paginate}) {
+const Pagination = ({dogsPerPage, totalDogs, paginate}) => {
     const pageNumbers = [];
 
     for(let i = 1; i <= Math.ceil(totalDogs / dogsPerPage); i++) {
@@ -26,3 +26,5 @@ export function Pagination({dogsPerPage, totalDogs, paginate}) {
         </div>
     )
 }
+
+export default Pagination;

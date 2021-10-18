@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './Welcome.module.css';
 
 
-export function Welcome() {
+const Welcome = () => {
 
     return (
         <section className={`${styles.container}`}>
@@ -16,3 +16,5 @@ export function Welcome() {
         </section>
     )
 }
+
+export default Welcome;

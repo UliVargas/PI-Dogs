@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import styles from './Dog.module.css';
 
-export function Dog({name, img, temperaments, weight, id}) {
+const Dog = ({name, img, temperaments, weight, id}) => {
 
 
     return (
@@ -14,10 +14,12 @@ export function Dog({name, img, temperaments, weight, id}) {
                         {temperaments}
                     </li>
                     <li>
-                        {weight} Años
+                        {weight} years
                     </li>
                 </ul>
             </Link>
         </div>
     )
 }
+
+export default Dog;

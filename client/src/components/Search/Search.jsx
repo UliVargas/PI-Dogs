@@ -6,7 +6,7 @@ import {useQuery} from "../../Hooks/useQuery";
 import styles from "./Search.module.css"
 
 
-export function Search() {
+const Search = () => {
     const query = useQuery();
     const searchBar = query.get('search')
 
@@ -41,3 +41,5 @@ export function Search() {
         </div>
     )
 }
+
+export default Search;

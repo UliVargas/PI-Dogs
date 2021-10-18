@@ -21,13 +21,23 @@ export function getAllDogs() {
 
 export function loadResult(value) {
     return async function (dispatch) {
-        await axios.get(`http://localhost:3001/dogs?name=${value}`)
-            .then(data => {
-                dispatch({
-                    type: LOAD_RESULT,
-                    payload: data.data.data
+        if (!value) {
+            await axios.get(`http://localhost:3001/dogs`)
+                .then(data => {
+                    dispatch({
+                        type: LOAD_RESULT,
+                        payload: data.data.data
+                    })
                 })
-            })
+        } else {
+            await axios.get(`http://localhost:3001/dogs?name=${value}`)
+                .then(data => {
+                    dispatch({
+                        type: LOAD_RESULT,
+                        payload: data.data.data
+                    })
+                })
+        }
     }
 }
 
@@ -44,7 +54,7 @@ export function getDogDetails(id) {
 }
 
 export function getAllTemps() {
-    return async function(dispatch) {
+    return async function (dispatch) {
         await axios.get(`http://localhost:3001/temperament`)
             .then(data => {
                 dispatch({
