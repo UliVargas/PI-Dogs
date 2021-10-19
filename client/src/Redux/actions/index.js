@@ -45,12 +45,12 @@ export const searchDogs = (query) => (dispatch) => {
 };
 
 
-export const sortDogsAsc = () => (dispatch, getState) => {
-	const { DogsReducers } = getState();
-	dispatch({ type: SORT_DOGS_ASC, payload: DogsReducers.breeds });
+export const sortDogsDesc = () => (dispatch, getState) => {
+	const { breeds } = getState();
+	dispatch({ type: SORT_DOGS_ASC, payload: breeds });
 };
 
-export const sortDogsDesc = () => (dispatch, getState) => {
-	const { DogsReducers } = getState();
-	dispatch({ type: SORT_DOGS_DESC, payload: DogsReducers.breeds });
+export const sortDogsAsc = () => (dispatch, getState) => {
+	const { breeds } = getState();
+	dispatch({ type: SORT_DOGS_DESC, payload: breeds });
 };
