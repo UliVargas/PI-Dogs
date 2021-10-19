@@ -9,7 +9,9 @@ const {
     FETCH_DOGS_REQUEST,
     FETCH_DOGS_ID_SUCCESS,
     FETCH_DOGS_ID_REQUEST,
-    FETCH_DOGS_ID_FAILED
+    FETCH_DOGS_ID_FAILED,
+    SORT_DOGS_WEIGHT_HIGHER,
+    SORT_DOGS_WEIGHT_LOWER
 } = require("./types")
 
 
@@ -53,4 +55,14 @@ export const sortDogsDesc = () => (dispatch, getState) => {
 export const sortDogsAsc = () => (dispatch, getState) => {
 	const { breeds } = getState();
 	dispatch({ type: SORT_DOGS_DESC, payload: breeds });
+};
+
+export const sortDogsHigher = () => (dispatch, getState) => {
+	const { breeds } = getState();
+	dispatch({ type: SORT_DOGS_WEIGHT_HIGHER, payload: breeds });
+};
+
+export const sortDogsLower = () => (dispatch, getState) => {
+	const { breeds } = getState();
+	dispatch({ type: SORT_DOGS_WEIGHT_LOWER, payload: breeds });
 };
