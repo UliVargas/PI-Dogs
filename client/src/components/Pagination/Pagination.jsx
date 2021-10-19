@@ -1,28 +1,39 @@
 import styles from "./Pagination.module.css"
 
 
-const Pagination = ({dogsPerPage, totalDogs, paginate}) => {
-    const pageNumbers = [];
+const Pagination = ({currentPage, setCurrentPage, totalDogs, dogPage}) => {
 
-    for(let i = 1; i <= Math.ceil(totalDogs / dogsPerPage); i++) {
-        pageNumbers.push(i)
-    }
+    const totalPages = Math.ceil(totalDogs / dogPage);
+
+    let pages = [];
+
+	for (let p = 1; p <= totalPages; p++) {
+		pages.push(p);
+	}
 
     return (
         <div>
             <ul className={styles.pagination}>
-                <div className={styles.pageContainer}>
-                    {
-                        pageNumbers.map(number => (
-                            <li key={number} className={styles.page}>
-                                <button onClick={() => paginate(number)} className={styles.pageLink}>
-                                    {number}
-                                </button>
-                            </li>
-                        ))
-                    }
-                </div>
-            </ul>
+			<li className={`${styles.pageContainer} ${currentPage === 1 && `disabled`}`}>
+				<button className="" onClick={() => setCurrentPage(currentPage - 1)}>
+					&laquo;
+				</button>
+			</li>
+			{pages.map((page) => (
+				<li
+					key={page}
+					className={` ${page === currentPage && `active`}`}
+					onClick={() => setCurrentPage(page)}
+				>
+					<button className="">{page}</button>
+				</li>
+			))}
+			<li className={`page-item ${currentPage === totalPages && `disabled`}`}>
+				<button className="" onClick={() => setCurrentPage(currentPage + 1)}>
+					&raquo;
+				</button>
+			</li>
+		</ul>
         </div>
     )
 }

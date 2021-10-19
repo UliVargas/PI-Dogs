@@ -1,13 +1,14 @@
 .pagination {
     list-style: none;
     padding: 0px;
-}
-.pageContainer {
-    margin: 0 auto;
-    max-width: 100rem;
     display: flex;
     justify-content: center;
+    margin: 0 auto;
+    max-width: 100rem;
     padding: 1rem 0;
+}
+.pageContainer {
+    
 }
 
 .pageLink {

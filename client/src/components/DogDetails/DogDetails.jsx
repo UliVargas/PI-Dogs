@@ -1,42 +1,50 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import {getDogDetails} from "../../actions";
 import {useDispatch, useSelector} from "react-redux";
 import styles from "./DogDetails.module.css"
 import Footer from "../Footer/Footer";
+import { fetchDogsId } from "../../Redux/actions";
+import Spinner from '../Spinner/Spinner'
 
 const DogDetails = () => {
 
     const {id} = useParams();
     const dispatch = useDispatch();
-    const details = useSelector(state => state)
+    const { breed, loading } = useSelector(state => state)
 
-
+    
         useEffect(() => {
-            dispatch(getDogDetails(id))
-        },[id])
-
+            dispatch(fetchDogsId(id))
+        },[dispatch, id])
 
     return (
-        <div className={styles.container}>
-             <Link to={"/home"}>
-                 <button >Atrás</button>
+        <>
+            {
+                loading ? (
+                    <Spinner />
+                ) : (
+
+                <div className={styles.container}>
+                    <Link to={"/home"}>
+                 <button>Atrás</button>
              </Link>
              <div className={styles.containerDetails}>
                  <div className={styles.img}>
-                     <img src={details.breed.img} alt=""/>
+                     <img src={breed.img} alt=""/>
                  </div>
                  <div className={styles.details}>
-                     <h3>{details.breed.name}</h3>
-                     <p>{details.breed.temperaments}</p>
-                     <p>{details.breed.height}</p>
-                     <p>{details.breed.weight}</p>
-                     <p>{details.breed.life_span}</p>
+                     <h3>{breed.name}</h3>
+                     <p>{breed.temperaments}</p>
+                     <p>{breed.height}</p>
+                     <p>{breed.weight}</p>
+                     <p>{breed.life_span}</p>
                  </div>
              </div>
              <Footer/>
-        </div>
+            </div>
+             )}
+        </>
     )
 }
 
-export default (DogDetails);
+export default DogDetails;

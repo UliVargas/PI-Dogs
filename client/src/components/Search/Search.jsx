@@ -1,27 +1,25 @@
 import {useDispatch} from "react-redux";
 import {useEffect, useState} from "react";
-import {loadResult} from "../../actions";
-import {useHistory} from "react-router-dom";
-import {useQuery} from "../../Hooks/useQuery";
+import {searchDogs} from "../../Redux/actions";
 import styles from "./Search.module.css"
+import {useHistory } from "react-router-dom";
 
 
 const Search = () => {
-    const query = useQuery();
-    const searchBar = query.get('search')
+
+    const History = useHistory();
+
 
     const dispatch = useDispatch()
     const [search, setSearch] = useState("");
-    const History = useHistory();
     const handleClick = (e) => {
         e.preventDefault();
         History.push('/home?search=' + search)
-        dispatch(loadResult(search))
     }
 
     useEffect(() => {
-        setSearch(searchBar || '')
-    }, [searchBar])
+       dispatch(searchDogs(search));
+    }, [dispatch, search])
 
     return(
         <div className={styles.container}>

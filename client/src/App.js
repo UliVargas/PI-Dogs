@@ -1,9 +1,8 @@
 import {Switch, Route} from "react-router-dom";
-import DogDetails from "./components/DogDetails/DogDetails";
 import Home from "./components/Home/Home";
 import Welcome  from "./components/Welcome/Welcome";
-import AddDog from "./components/AddDog/AddDog";
-
+import AddDog from "./components/AddDog/AddDog"
+import DogDetails from "./components/DogDetails/DogDetails"
 
 
 
