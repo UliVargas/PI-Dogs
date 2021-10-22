@@ -2,7 +2,6 @@ import {Link} from "react-router-dom";
 import styles from './Dog.module.css';
 
 const Dog = ({name, img, temperaments, weight, id}) => {
-    console.log(temperaments)
 
 
     return (

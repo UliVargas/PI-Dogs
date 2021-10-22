@@ -11,8 +11,13 @@ const {
     FETCH_DOGS_ID_REQUEST,
     FETCH_DOGS_ID_FAILED,
     SORT_DOGS_WEIGHT_HIGHER,
-    SORT_DOGS_WEIGHT_LOWER
-} = require("./types")
+    SORT_DOGS_WEIGHT_LOWER,
+    FETCH_TEMPERAMENTS_FAILED,
+    FETCH_TEMPERAMENTS_SUCCESS,
+    FETCH_TEMPERAMENTS_REQUEST,
+    FILTER_BY_TEMPERAMENT,
+    ADD_BREED_TO_DATABASE
+} = require("../actions/types")
 
 
 export const fetchDogs = () => async (dispatch) => {
@@ -42,9 +47,26 @@ export const fetchDogsId = (id) => async(dispatch) => {
     }
 }
 
+export const fetchTemperaments = () => async (dispatch) => {
+    dispatch({type: FETCH_TEMPERAMENTS_REQUEST});
+
+    try {
+        const data = await axios.get('http://localhost:3001/temperament');
+        dispatch({type: FETCH_TEMPERAMENTS_SUCCESS, payload: data.data})
+        }
+    catch(error) {
+        dispatch({type: FETCH_TEMPERAMENTS_FAILED, payload: error.message});
+        console.log(error.message)
+    }
+}
+
 export const searchDogs = (query) => (dispatch) => {
 	dispatch({ type: SEARCH_DOGS, payload: query });
 };
+
+export const filterByTemperament = (temps) => async (dispatch) => {
+    dispatch({type: FILTER_BY_TEMPERAMENT, payload: temps})
+}
 
 
 export const sortDogsDesc = () => (dispatch, getState) => {

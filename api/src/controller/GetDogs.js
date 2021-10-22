@@ -94,7 +94,12 @@ async function getDogs(req, res) {
 
 async function getDogsId(req, res) {
     const { id } = req.params;
-    const dbId = await Breed.findByPk(Number(id), { include: Temperament });
+    const dbId = await Breed.findByPk(Number(id), {include: Temperament});
+    const arrayTemps = [];
+
+    for await(let temperament of dbId.temperaments) {
+        arrayTemps.push(temperament.dataValues.name)
+    }
 
     if (dbId) return res.json({
         id: dbId.id,
@@ -103,7 +108,7 @@ async function getDogsId(req, res) {
         weight: dbId.weight,
         life_span: dbId.life_span,
         img: dbId.img,
-        temperaments: arrayTemperaments.join(" ,".toLocaleLowerCase())
+        temperaments: arrayTemps.join(", ")
     });
 
     const apiId = await axios(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)

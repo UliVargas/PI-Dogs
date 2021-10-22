@@ -1,0 +1,19 @@
+.container {
+    color: #FFFFFF;
+    max-width: 80rem;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10rem;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formContainer label {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}

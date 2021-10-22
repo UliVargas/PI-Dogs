@@ -9,13 +9,19 @@ const {
     FETCH_DOGS_ID_REQUEST,
     FETCH_DOGS_ID_FAILED,
     SORT_DOGS_WEIGHT_HIGHER,
-    SORT_DOGS_WEIGHT_LOWER
+    SORT_DOGS_WEIGHT_LOWER,
+    FETCH_TEMPERAMENTS_FAILED,
+    FETCH_TEMPERAMENTS_SUCCESS,
+    FETCH_TEMPERAMENTS_REQUEST,
+    FILTER_BY_TEMPERAMENT,
+    ADD_BREED_TO_DATABASE
 } = require("../actions/types")
 
 const initialState = {
     breeds: [],
     searchResults: [],
-    breed: []
+    breed: [],
+    temperaments: [],
 }
 
 export const DogsReducers = (state = initialState, action) => {
@@ -55,6 +61,23 @@ export const DogsReducers = (state = initialState, action) => {
                 loading: false,
                 error: action.payload
             };
+            case FETCH_TEMPERAMENTS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+        case FETCH_TEMPERAMENTS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                temperaments: action.payload
+            };
+        case FETCH_TEMPERAMENTS_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
         case SORT_DOGS_ASC:
             const sortAsc = action.payload.sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? 1 : a.name > b.name ? -1 : 0));
             return {
@@ -86,6 +109,21 @@ export const DogsReducers = (state = initialState, action) => {
                 breeds: state.searchResults.filter((dog) => 
                 dog.name.toLowerCase().includes(action.payload.toLowerCase()))
             };
+
+        case FILTER_BY_TEMPERAMENT:
+            let resultTemps = state.searchResults.filter(temp => {
+                if(!temp.temperaments) return undefined;
+                else return temp.temperaments.includes(action.payload)})
+            
+                return {
+                ...state,
+                breeds: resultTemps
+            }
+            case ADD_BREED_TO_DATABASE:
+            return {
+                ...state,
+                dogAdded: action.payload,
+            }
         default:
             return state
     }

@@ -32,9 +32,10 @@ const Order = () => {
             <select
               name=""
               id="filtrar"
+              defaultValue
               onChange={(e) => setSort(e.target.value)}
             >
-              <option value="" selected></option>
+              <option value="" ></option>
               <option value="" disabled>--Alphabetical--</option>
               <option value="desc">Descendente</option>
               <option value="asc">Ascendente</option>
