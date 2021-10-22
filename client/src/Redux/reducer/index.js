@@ -14,7 +14,9 @@ const {
     FETCH_TEMPERAMENTS_SUCCESS,
     FETCH_TEMPERAMENTS_REQUEST,
     FILTER_BY_TEMPERAMENT,
-    ADD_BREED_TO_DATABASE
+    ADD_BREED_TO_DATABASE,
+    FILTER_BY_API,
+    FILTER_BY_USER
 } = require("../actions/types")
 
 const initialState = {
@@ -61,7 +63,7 @@ export const DogsReducers = (state = initialState, action) => {
                 loading: false,
                 error: action.payload
             };
-            case FETCH_TEMPERAMENTS_REQUEST:
+        case FETCH_TEMPERAMENTS_REQUEST:
             return {
                 ...state,
                 loading: true
@@ -90,9 +92,9 @@ export const DogsReducers = (state = initialState, action) => {
                 ...state,
                 breeds: sortDesc
             };
-            case SORT_DOGS_WEIGHT_LOWER:
+        case SORT_DOGS_WEIGHT_LOWER:
             const sortHeigher = action.payload.sort((a, b) => (Number(a.weight.split("-")[0]) - Number(b.weight.split("-")[0])));
-            
+
             return {
                 ...state,
                 breeds: sortHeigher
@@ -106,20 +108,31 @@ export const DogsReducers = (state = initialState, action) => {
         case SEARCH_DOGS:
             return {
                 ...state,
-                breeds: state.searchResults.filter((dog) => 
-                dog.name.toLowerCase().includes(action.payload.toLowerCase()))
+                breeds: state.searchResults.filter((dog) =>
+                    dog.name.toLowerCase().includes(action.payload.toLowerCase()))
             };
 
         case FILTER_BY_TEMPERAMENT:
             let resultTemps = state.searchResults.filter(temp => {
-                if(!temp.temperaments) return undefined;
-                else return temp.temperaments.includes(action.payload)})
-            
-                return {
+                if (!temp.temperaments) return undefined;
+                else return temp.temperaments.includes(action.payload)
+            })
+
+            return {
                 ...state,
                 breeds: resultTemps
             }
-            case ADD_BREED_TO_DATABASE:
+        case FILTER_BY_API:
+            return {
+                ...state,
+                breeds: state.searchResults.filter(breed => breed.id < 500 )
+            }
+        case FILTER_BY_USER:
+            return {
+                ...state,
+                breeds: state.searchResults.filter(breed => breed.id > 600)
+            }
+        case ADD_BREED_TO_DATABASE:
             return {
                 ...state,
                 dogAdded: action.payload,

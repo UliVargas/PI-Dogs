@@ -4,7 +4,9 @@ const { Breed, Temperament } = require("../db");
 async function postDog(req, res) {
     const {name, temperaments, height, weight, life_span} = req.body;
     const [breed, created] = await Breed.findOrCreate({
-        where: {name},
+        where: {
+          name
+        },
         defaults: {
             height, 
             weight, 
@@ -23,7 +25,7 @@ async function postDog(req, res) {
 
     if(!created) return res.json("noCreated");
 
-    return res.json(breed.id)
+    return res.json({data: breed.id})
 }
 
 module.exports = {

@@ -6,14 +6,14 @@ import axios from 'axios'
 const AddDog = () => {
 
     const [form, setForm] = useState({
-    "breedName": "",
-    "minHeight": "",
-    "maxHeight": "",
-    "minWeight": "",
-    "maxWeight": "",
-    "minLife_span": "",
-    "maxLife_span": "",
-    "temperaments": "",
+    breedName: "",
+    minHeight: "",
+    maxHeight: "",
+    minWeight: "",
+    maxWeight: "",
+    minLife_span: "",
+    maxLife_span: "",
+    temperaments: "",
     })
 
     const handleChange = (e) => {
@@ -25,8 +25,9 @@ const AddDog = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        let resp = await axios.post('http://localhost:3001/dog', form);
-        return resp.data
+        await axios.post('http://localhost:3001/dog', form)
+        .then(respo => console.log(respo))
+        .catch(err => console.log(err))
     }
 
     return (
@@ -34,7 +35,7 @@ const AddDog = () => {
             <form onSubmit={handleSubmit}>
                 <div className={styles.formContainer}>
                     <label htmlFor="name">Breed Name: </label>
-                    <input type="text" name="breed" id="name" onChange={handleChange}/>
+                    <input type="text" name="breedName" id="name" onChange={handleChange}/>
                 </div>
 
                 <div className={styles.formContainer}>

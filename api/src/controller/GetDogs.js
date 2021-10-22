@@ -6,10 +6,9 @@ const temps = new Set();
 
 async function getDogs(req, res) {
     const { name } = req.query;
-    const dbBreeds = await Breed.findAll({ include: Temperament });
     const resp = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
-        .then(data => data.data);
-
+    .then(data => data.data);
+    const dbBreeds = await Breed.findAll({ include: Temperament });
     if (!name) {
         const Breeds = []
         for await (let element of resp) {
@@ -30,7 +29,7 @@ async function getDogs(req, res) {
             } 
           }
           temps.forEach((temp)=>{
-            Temperament.create({
+            Temperament.findOrCreate({
               name: temp
             })
           })
@@ -50,7 +49,6 @@ async function getDogs(req, res) {
                 data: Breeds
             })
     } else {
-        
         const arraySearch = [];
         for await (let element of resp) {
             if (element.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())) {
@@ -63,32 +61,32 @@ async function getDogs(req, res) {
                 })
             }
         }
-
+        
         const dbHasWord = await Breed.findAll(
             {include: Temperament,
-            where: {
-              name: {
-                [Op.substring]: name.toLocaleLowerCase()
-              }
+                where: {
+                    name: {
+                        [Op.substring]: name.toLocaleLowerCase()
+                    }
+                }
             }
-          }
-          );
-
-          for await (let element of dbHasWord) {
-            let arrayTemperaments = [];
-            for await (let temp of element?.dataValues?.temperaments){
-              arrayTemperaments.push(temp.dataValues.name)
-            }
-      
-            arraySearch.push({name: element.dataValues.name, 
-                              temperaments: arrayTemperaments.join(", ").toLocaleLowerCase(), 
-                              img: element.dataValues.img, 
-                              id: element.dataValues.id,
-                              weight: element.dataValues.weight})
-          };
-        res.json({
-            data: arraySearch
-        });
+            );
+            
+            for await (let element of dbHasWord) {
+                let arrayTemperaments = [];
+                for await (let temp of element?.dataValues?.temperaments){
+                    arrayTemperaments.push(temp.dataValues.name)
+                }
+                
+                arraySearch.push({name: element.dataValues.name, 
+                    temperaments: arrayTemperaments.join(", ").toLocaleLowerCase(), 
+                    img: element.dataValues.img, 
+                    id: element.dataValues.id,
+                    weight: element.dataValues.weight})
+                };
+                res.json({
+                    data: arraySearch
+                });
     }
 };
 
@@ -97,28 +95,15 @@ async function getDogsId(req, res) {
     const dbId = await Breed.findByPk(Number(id), {include: Temperament});
     const arrayTemps = [];
 
-    for await(let temperament of dbId.temperaments) {
-        arrayTemps.push(temperament.dataValues.name)
-    }
-
-    if (dbId) return res.json({
-        id: dbId.id,
-        name: dbId.name,
-        height: dbId.height,
-        weight: dbId.weight,
-        life_span: dbId.life_span,
-        img: dbId.img,
-        temperaments: arrayTemps.join(", ")
-    });
-
+    
     const apiId = await axios(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
-        .then(data => {
-            for (let element of data.data) {
-                if (element.id === Number(id)) {
-                    return element;
-                }
+    .then(data => {
+        for (let element of data.data) {
+            if (element.id === Number(id)) {
+                return element;
             }
-        });
+        }
+    });
     if (apiId !== undefined) return res.json({
         id: apiId.id,
         name: apiId.name,
@@ -128,6 +113,22 @@ async function getDogsId(req, res) {
         img: apiId.image.url,
         temperaments: apiId.temperament
     });
+
+
+    for await(let temperament of dbId.temperaments) {
+        arrayTemps.push(temperament.dataValues.name)
+    }
+    
+    if (dbId !== undefined) return res.json({
+        id: dbId.id,
+        name: dbId.name,
+        height: dbId.height,
+        weight: dbId.weight,
+        life_span: dbId.life_span,
+        img: dbId.img,
+        temperaments: arrayTemps.join(", ")
+    });
+    
     else res.status(404).json("");
 };
 

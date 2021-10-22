@@ -16,7 +16,9 @@ const {
     FETCH_TEMPERAMENTS_SUCCESS,
     FETCH_TEMPERAMENTS_REQUEST,
     FILTER_BY_TEMPERAMENT,
-    ADD_BREED_TO_DATABASE
+    ADD_BREED_TO_DATABASE,
+    FILTER_BY_API,
+    FILTER_BY_USER
 } = require("../actions/types")
 
 
@@ -68,6 +70,15 @@ export const filterByTemperament = (temps) => async (dispatch) => {
     dispatch({type: FILTER_BY_TEMPERAMENT, payload: temps})
 }
 
+export const filterByApi = () => async (dispatch, getState) => {
+    const { breeds } = getState();
+    dispatch({type: FILTER_BY_API, payload: breeds})
+}
+
+export const filterByUser = () => async (dispatch, getState) => {
+    const { breeds } = getState();
+    dispatch({type: FILTER_BY_USER, payload: breeds})
+}
 
 export const sortDogsDesc = () => (dispatch, getState) => {
 	const { breeds } = getState();
