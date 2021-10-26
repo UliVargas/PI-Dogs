@@ -18,7 +18,8 @@ const {
     FILTER_BY_TEMPERAMENT,
     ADD_BREED_TO_DATABASE,
     FILTER_BY_API,
-    FILTER_BY_USER
+    FILTER_BY_USER,
+    FILTER_BY_ALL,
 } = require("../actions/types")
 
 
@@ -62,12 +63,32 @@ export const fetchTemperaments = () => async (dispatch) => {
     }
 }
 
+export const postDog = (data) => async (dispatch) => {
+    try {
+        const resp = await axios.post("http://localhost:3001/dog", {
+            height: `${data.minHeight} - ${data.maxHeight}`,
+            weight: `${data.minWeight} - ${data.maxWeight}`,
+            life_span: `${data.minLife_span} - ${data.maxLife_span}`,
+            temperaments: data.temperament?.split(",")
+        },
+        console.log(resp.data)
+        )
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const searchDogs = (query) => (dispatch) => {
 	dispatch({ type: SEARCH_DOGS, payload: query });
 };
 
 export const filterByTemperament = (temps) => async (dispatch) => {
     dispatch({type: FILTER_BY_TEMPERAMENT, payload: temps})
+}
+
+export const fillterAll = () => async (dispatch, getState) => {
+    const { breeds } = getState();
+    dispatch({type: FILTER_BY_ALL, payload: breeds})
 }
 
 export const filterByApi = () => async (dispatch, getState) => {
@@ -99,3 +120,4 @@ export const sortDogsLower = () => (dispatch, getState) => {
 	const { breeds } = getState();
 	dispatch({ type: SORT_DOGS_WEIGHT_LOWER, payload: breeds });
 };
+

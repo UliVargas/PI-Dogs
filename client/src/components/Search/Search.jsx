@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {searchDogs} from "../../Redux/actions";
 import styles from "./Search.module.css"
 import {useHistory } from "react-router-dom";
+import searchIcon from "../../img/search.svg"
 
 
 const Search = () => {
@@ -24,17 +25,17 @@ const Search = () => {
     return(
         <div className={styles.container}>
             <form action="">
-                <input type="text"
-                       value={search}
-                       onChange={e => setSearch(e.target.value)}
-                       placeholder="Buscar Raza..."
-                />
                 <button
                     onClick={(e) => {
                         handleClick(e)
                     }}
-                >Buscar
+                ><img src={searchIcon} alt="" className={styles.searchIcon}/>
                 </button>
+                <input type="text"
+                       value={search}
+                       onChange={e => setSearch(e.target.value)}
+                       placeholder="Search Breed..."
+                />
             </form>
         </div>
     )

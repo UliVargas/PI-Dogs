@@ -2,16 +2,17 @@ const { Breed, Temperament } = require("../db");
 
 
 async function postDog(req, res) {
-    const {name, temperaments, height, weight, life_span} = req.body;
+    const {name, temperaments, height, weight, image, life_span} = req.body;
     const [breed, created] = await Breed.findOrCreate({
-        where: {
-          name
-        },
-        defaults: {
-            height, 
-            weight, 
-            life_span
-        }
+      where: {
+        name: name
+      },
+          defaults: {
+            height,
+            weight,
+            life_span,
+            image
+          }
 
     })
     if(temperaments && created){
@@ -23,9 +24,9 @@ async function postDog(req, res) {
         }
       }
 
-    if(!created) return res.json("noCreated");
+    if(!created) return res.status(404).json({mesg: "It is not possible to create the breed in the database, information is missing or that breed already exists"});
 
-    return res.json({data: breed.id})
+    return res.status(201).json({data: breed.id})
 }
 
 module.exports = {

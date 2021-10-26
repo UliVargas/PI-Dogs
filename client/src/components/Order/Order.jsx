@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sortDogsAsc, sortDogsDesc, sortDogsHigher, sortDogsLower } from "../../Redux/actions";
-import { SORT_DOGS_WEIGHT_UP } from "../../Redux/actions/types";
 import styles from "./Order.module.css";
 
 const Order = () => {
@@ -28,20 +27,21 @@ const Order = () => {
     <div>
       <form action="" className={styles.formContainer}>
         <div className={styles.container}>
-          <p>Ordenar Por:</p>
             <select
               name=""
               id="filtrar"
               defaultValue
               onChange={(e) => setSort(e.target.value)}
             >
-              <option value="" ></option>
-              <option value="" disabled>--Alphabetical--</option>
-              <option value="desc">Descendente</option>
-              <option value="asc">Ascendente</option>
-              <option value="" disabled>--Weight--</option>
+                <option value="" selected>Order By</option>
+              <optgroup label="Alphabetical">
+                <option value="asc">Ascendente</option>
+                <option value="desc">Descendente</option>
+              </optgroup>
+              <optgroup label="Weight">
               <option value="low">Menor a Mayor</option>
               <option value="hig">Mayor a Menor</option>
+              </optgroup>
             </select>
         </div>
       </form>

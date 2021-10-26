@@ -1,48 +1,67 @@
-import { Link, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import {Link, useParams} from "react-router-dom";
+import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import styles from "./DogDetails.module.css"
-import Footer from "../Footer/Footer";
-import { fetchDogsId } from "../../Redux/actions";
-import Spinner from '../Spinner/Spinner'
+import styles from "./DogDetails.module.css";
+import {fetchDogsId} from "../../Redux/actions";
+import Spinner from '../Spinner/Spinner';
+import arrowBack from "../../img/arrow-left.svg"
 
 const DogDetails = () => {
 
     const {id} = useParams();
     const dispatch = useDispatch();
-    const { breed, loading } = useSelector(state => state)
+    const {breed, loading} = useSelector(state => state)
 
-    
-        useEffect(() => {
-            dispatch(fetchDogsId(id))
-        },[dispatch, id])
+
+    useEffect(() => {
+        dispatch(fetchDogsId(id))
+    }, [dispatch, id])
 
     return (
         <>
             {
                 loading ? (
-                    <Spinner />
+                    <Spinner/>
                 ) : (
 
-                <div className={styles.container}>
-                    <Link to={"/home"}>
-                 <button>Atrás</button>
-             </Link>
-             <div className={styles.containerDetails}>
-                 <div className={styles.img}>
-                     <img src={breed.img} alt=""/>
-                 </div>
-                 <div className={styles.details}>
-                     <h3>{breed.name}</h3>
-                     <p>{breed.temperaments}</p>
-                     <p>{breed.height}</p>
-                     <p>{breed.weight}</p>
-                     <p>{breed.life_span}</p>
-                 </div>
-             </div>
-             <Footer/>
-            </div>
-             )}
+                    <div className={styles.container}>
+                        <Link to={"/home"}>
+                            <img src={arrowBack} alt=""/>
+                            Back
+                        </Link>
+                        <div className={styles.containerDetails}>
+                            <div className={styles.img}>
+                                <img src={breed.img} alt=""/>
+                            </div>
+                            <div className={styles.details}>
+                                <h2>{breed.name}</h2>
+                                <div className={styles.detailsDates}>
+                                    <p>
+                                        Temperaments:
+                                    <span> {breed.temperaments}</span>
+                                    </p>
+                                </div>
+                                <div className={styles.detailsDates}>
+                                    <p>
+                                        Height:<span> {breed.height}</span>
+                                    </p>
+                                </div>
+                                <div className={styles.detailsDates}>
+                                    <p>
+                                        Weight:
+                                        <span> {breed.weight}</span>
+                                    </p>
+                                </div>
+                                <div className={styles.detailsDates}>
+                                    <p>
+                                        Life:
+                                        <span> {breed.life_span}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
         </>
     )
 }

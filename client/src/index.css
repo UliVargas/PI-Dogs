@@ -14,21 +14,21 @@ h1, h2, h3, h4 {
 }
 
 h1{
-  font-size: 4rem;
+  font-size: 3.4rem;
   font-weight: 900;
 }
 h2{
-  font-size: 3.6rem;
+  font-size: 3rem;
 }
 h3{
-  font-size: 3.2rem;
+  font-size: 2.6rem;
 }
 h4{
-  font-size: 2.8rem;
+  font-size: 2.2rem;
 }
 a {
   text-decoration: none;
-  color: #FFFFFF;
+  color: hsl(200, 15%, 8%);
 }
 img {
   max-width: 100%;
@@ -37,11 +37,15 @@ img {
 body {
   font-family: 'Noto Sans', sans-serif;
   font-size: 1.6rem;
-  /* background-image: linear-gradient(rgba(0,0,0,50%), rgba(0,0,0,50%)), url(./img/DogWelcome.svg); */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 100%;
-  background-color: #252223;
+  background-color: hsl(0, 0%, 91%);
+}
+.container {
+  margin: 0 auto;
+  max-width: 120rem;
+  width: 90%;
 }

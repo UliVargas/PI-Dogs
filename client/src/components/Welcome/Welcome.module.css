@@ -1,13 +1,18 @@
 .container {
-    max-width: 90rem;
+    max-width: 100%;
     margin: 0 auto;
     height: 100vh;
     display: flex;
     align-items: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 30%), rgba(0, 0, 0, 30%)), url(../../img/DogWelcome.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .Welcome {
+    margin: 0 auto;
     border-radius: .5rem;
-    background-color: #00000020;
+    background-color: #00000050;
     height: 40rem;
     color: #FFFFFF;
     text-align: center;

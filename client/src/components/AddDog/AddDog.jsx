@@ -1,11 +1,10 @@
 import styles from "./AddDog.module.css";
-import {useState} from "react";
-import {useDispatch} from "react-redux";
-import axios from 'axios'
+import arrowBack from "../../img/arrow-left.svg";
+import {Link} from "react-router-dom";
+import { useForm } from "../../Hooks/useForm";
+import Spinner from "../Spinner/Spinner"
 
-const AddDog = () => {
-
-    const [form, setForm] = useState({
+const initialForm = {
     breedName: "",
     minHeight: "",
     maxHeight: "",
@@ -14,68 +13,97 @@ const AddDog = () => {
     minLife_span: "",
     maxLife_span: "",
     temperaments: "",
-    })
+};
 
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
-    }
+const AddDog = () => {
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        await axios.post('http://localhost:3001/dog', form)
-        .then(respo => console.log(respo))
-        .catch(err => console.log(err))
-    }
+    const {form,
+        fail,
+        error,
+        loading,
+        response,
+        handleBlur,
+        handleSubmit,
+        handleChange} = useForm(initialForm);
+
 
     return (
-        <div className={styles.container}>
-            <form onSubmit={handleSubmit}>
-                <div className={styles.formContainer}>
-                    <label htmlFor="name">Breed Name: </label>
-                    <input type="text" name="breedName" id="name" onChange={handleChange}/>
-                </div>
+        <div className={styles.bgForm}>
+            <div className={styles.container}>
+            <Link to={"/home"}>
+                <img src={arrowBack} alt=""/>
+                Back
+            </Link>
+                <form onSubmit={handleSubmit} className={styles.formBox}>
 
-                <div className={styles.formContainer}>
-                    <label htmlFor="height">Min Height in CM: </label>
-                    <input type="number" name="minHeight" id="height" onChange={handleChange}/>
-                </div>
+                    <div className={styles.formContainer}>
+                        <label htmlFor="breedName">Breed Name: </label>
+                        <input type="text" value={form.breedName} name="breedName" id="breedName" onChange={handleChange} onBlur={handleBlur}
+                            placeholder={"Breed Name"} />
+                    </div>
 
-                <div className={styles.formContainer}>
-                    <label htmlFor="height">Max Height in CM: </label>
-                    <input type="number" name="maxHeight" id="height" onChange={handleChange}/>
-                </div>
+                    <div className={styles.formContainer}>
+                        <label htmlFor="minHeight">Min Height In CM: </label>
+                        <input type="number" value={form.minHeight} name="minHeight" min={1} id="minHeight"
+                            placeholder={"Min Height"} onChange={handleChange} onBlur={handleBlur} />
+                    </div>
 
-                <div className={styles.formContainer}>
-                    <label htmlFor="weight">Min Weight in KG: </label>
-                    <input type="number" name="minWeight" id="weight" onChange={handleChange}/>
-                </div>
+                   
 
-                <div className={styles.formContainer}>
-                    <label htmlFor="weight">Max Weight in KG: </label>
-                    <input type="number" name="maxWeight" id="weight" onChange={handleChange}/>
-                </div>
+                    <div className={styles.formContainer}>
+                        <label htmlFor="maxHeight">Max Height In CM: </label>
+                        <input type="number" value={form.maxHeight} name="maxHeight" min={1} id="maxHeight"
+                            placeholder={"Max Height"} onChange={handleChange} onBlur={handleBlur} />
+                    </div>
 
-                <div className={styles.formContainer}>
-                    <label htmlFor="minLife_span">Min Years of life: </label>
-                    <input type="number" name="minLife_span" id="life_span" onChange={handleChange}/>
-                </div>
+                    
 
-                <div className={styles.formContainer}>
-                    <label htmlFor="maxLife_span">Max Years of life: </label>
-                    <input type="number" name="maxLife_span" id="life_span" onChange={handleChange}/>
-                </div>
+                    <div className={styles.formContainer}>
+                        <label htmlFor="minWeight">Min Weight In KG: </label>
+                        <input type="number" value={form.minWeight} name="minWeight" id="minWeight" min={1}
+                            placeholder={"Min Weight"} onChange={handleChange} onBlur={handleBlur} />
+                    </div>
+                    <div className={styles.formContainer}>
+                        <label htmlFor="maxWeight">Max Weight In KG: </label>
+                        <input type="number" value={form.maxWeight} name="maxWeight" id="maxWeight" min={1}
+                            placeholder={"Max Weight"} onChange={handleChange} onBlur={handleBlur} />
+                    </div>
 
-                <div className={styles.formContainer}>
-                    <label htmlFor="temperaments">Temperaments: </label>
-                    <input type="text" name="temperaments" id="temperaments" onChange={handleChange}/>
-                </div>
+                    <div className={styles.formContainer}>
+                        <label htmlFor="minLife_span">Min Years Of Life: </label>
+                        <input type="number" value={form.minLife_span} name="minLife_span" id="minLife_span" min={1}
+                            placeholder={"Min Years Of Life"} onChange={handleChange} onBlur={handleBlur}
+                            />
+                    </div>
 
-                <input type="submit"/>
+                    <div className={styles.formContainer}>
+                        <label htmlFor="maxLife_span">Max Years Of Life: </label>
+                        <input type="number" value={form.maxLife_span} name="maxLife_span" id="maxLife_span" min={1}
+                            placeholder={"Max Years Of Life"} onChange={handleChange} onBlur={handleBlur}
+                            />
+                    </div>
 
-            </form>
+                    <div>
+                        <label htmlFor="img">Image: </label>
+                        <input type="text" type="text" value={form.image} name="image" placeholder="Add Your Image" onChange={handleChange}/>
+                    </div>
+
+                    <div className={styles.formContainer}>
+                        <label htmlFor="temperaments">Temperaments: </label>
+                        <input type="text" value={form.temperaments} name="temperaments" placeholder="Add Your Temperaments" onChange={handleChange} onBlur={handleBlur}/>
+                    </div>
+
+                    {
+                        fail ? (
+                            <div className={styles.messageError}><p>{error}</p></div>
+                        ) : (
+                            response && <div className={styles.message}><h4>Your breed of dog has been created</h4></div>
+                        )
+                    }
+
+                    <input type="submit" Value="Add" className={styles.submitButton}/>
+                </form>
+            </div>
         </div>
     )
 }

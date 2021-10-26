@@ -16,7 +16,8 @@ const {
     FILTER_BY_TEMPERAMENT,
     ADD_BREED_TO_DATABASE,
     FILTER_BY_API,
-    FILTER_BY_USER
+    FILTER_BY_USER,
+    FILTER_BY_ALL,
 } = require("../actions/types")
 
 const initialState = {
@@ -113,6 +114,7 @@ export const DogsReducers = (state = initialState, action) => {
             };
 
         case FILTER_BY_TEMPERAMENT:
+            console.log(action.payload)
             let resultTemps = state.searchResults.filter(temp => {
                 if (!temp.temperaments) return undefined;
                 else return temp.temperaments.includes(action.payload)
@@ -125,12 +127,17 @@ export const DogsReducers = (state = initialState, action) => {
         case FILTER_BY_API:
             return {
                 ...state,
-                breeds: state.searchResults.filter(breed => breed.id < 500 )
+                breeds: state.searchResults.filter(breed => breed.id < 500)
             }
         case FILTER_BY_USER:
             return {
                 ...state,
                 breeds: state.searchResults.filter(breed => breed.id > 600)
+            }
+        case FILTER_BY_ALL:
+            return {
+                ...state,
+                breeds: state.searchResults
             }
         case ADD_BREED_TO_DATABASE:
             return {

@@ -1,0 +1,13 @@
+.formFilter {
+    display: flex;
+    align-items: center;
+}
+
+.filterTemps {
+    margin-right: 2rem;
+}
+
+.formFilter select {
+    padding: .5rem;
+    border: none;
+}

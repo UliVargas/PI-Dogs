@@ -12,3 +12,8 @@
     margin: 0;
     margin: .5rem;
 }
+
+.container select {
+    padding: .8rem;
+    border: none;
+}
