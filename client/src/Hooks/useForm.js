@@ -127,7 +127,7 @@ export const useForm = (initialForm) => {
                     }, 3000)
                  }
                  
-                 if(!form.breedName && !form.minHeight && !form.maxHeight && !form.minWeight && !form.maxWeight && !form.minLife_span && !form.maxLife_span && form.img) {
+                 if(!form.breedName && !form.minHeight && !form.maxHeight && !form.minWeight && !form.maxWeight && !form.minLife_span && !form.maxLife_span && !form.img) {
                     setFail(true);
                     setError('Please complete the form')
                     setTimeout(() => {

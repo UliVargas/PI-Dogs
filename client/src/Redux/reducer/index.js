@@ -125,7 +125,6 @@ export const DogsReducers = (state = initialState, action) => {
                 if (!temp.temperaments) return undefined;
                 else return temp.temperaments.includes(action.payload)
             })
-
             return {
                 ...state,
                 breeds: resultTemps

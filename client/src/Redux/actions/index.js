@@ -109,5 +109,3 @@ export const sortDogsLower = () => (dispatch, getState) => {
 	const { breeds } = getState();
 	dispatch({ type: SORT_DOGS_WEIGHT_LOWER, payload: breeds });
 };
-
-
