@@ -18,6 +18,7 @@ const {
     FILTER_BY_API,
     FILTER_BY_USER,
     FILTER_BY_ALL,
+    REMOVE_DOGS_ID
 } = require("../actions/types")
 
 const initialState = {
@@ -64,6 +65,12 @@ export const DogsReducers = (state = initialState, action) => {
                 loading: false,
                 error: action.payload
             };
+        case REMOVE_DOGS_ID:
+            return {
+                ...state,
+                loading: false,
+                breed: initialState.breed
+            }
         case FETCH_TEMPERAMENTS_REQUEST:
             return {
                 ...state,
@@ -114,7 +121,6 @@ export const DogsReducers = (state = initialState, action) => {
             };
 
         case FILTER_BY_TEMPERAMENT:
-            console.log(action.payload)
             let resultTemps = state.searchResults.filter(temp => {
                 if (!temp.temperaments) return undefined;
                 else return temp.temperaments.includes(action.payload)

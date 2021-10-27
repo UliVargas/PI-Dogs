@@ -16,10 +16,10 @@ const {
     FETCH_TEMPERAMENTS_SUCCESS,
     FETCH_TEMPERAMENTS_REQUEST,
     FILTER_BY_TEMPERAMENT,
-    ADD_BREED_TO_DATABASE,
     FILTER_BY_API,
     FILTER_BY_USER,
     FILTER_BY_ALL,
+    REMOVE_DOGS_ID
 } = require("../actions/types")
 
 
@@ -50,6 +50,10 @@ export const fetchDogsId = (id) => async(dispatch) => {
     }
 }
 
+export const removeFetchDogsId = () => (dispatch) => {
+    dispatch({type: REMOVE_DOGS_ID})
+}
+
 export const fetchTemperaments = () => async (dispatch) => {
     dispatch({type: FETCH_TEMPERAMENTS_REQUEST});
 
@@ -60,21 +64,6 @@ export const fetchTemperaments = () => async (dispatch) => {
     catch(error) {
         dispatch({type: FETCH_TEMPERAMENTS_FAILED, payload: error.message});
         console.log(error.message)
-    }
-}
-
-export const postDog = (data) => async (dispatch) => {
-    try {
-        const resp = await axios.post("http://localhost:3001/dog", {
-            height: `${data.minHeight} - ${data.maxHeight}`,
-            weight: `${data.minWeight} - ${data.maxWeight}`,
-            life_span: `${data.minLife_span} - ${data.maxLife_span}`,
-            temperaments: data.temperament?.split(",")
-        },
-        console.log(resp.data)
-        )
-    } catch (error) {
-        console.log(error);
     }
 }
 
@@ -120,4 +109,5 @@ export const sortDogsLower = () => (dispatch, getState) => {
 	const { breeds } = getState();
 	dispatch({ type: SORT_DOGS_WEIGHT_LOWER, payload: breeds });
 };
+
 

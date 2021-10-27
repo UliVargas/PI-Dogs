@@ -1,4 +1,3 @@
-import spinner from './spinner.png'
 import styles from './Spinner.module.css'
 
 

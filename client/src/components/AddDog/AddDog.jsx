@@ -12,6 +12,7 @@ const initialForm = {
     maxWeight: "",
     minLife_span: "",
     maxLife_span: "",
+    img: "",
     temperaments: "",
 };
 
@@ -44,7 +45,7 @@ const AddDog = () => {
 
                     <div className={styles.formContainer}>
                         <label htmlFor="minHeight">Min Height In CM: </label>
-                        <input type="number" value={form.minHeight} name="minHeight" min={1} id="minHeight"
+                        <input type="number" value={form.minHeight} name="minHeight" min="1" id="minHeight"
                             placeholder={"Min Height"} onChange={handleChange} onBlur={handleBlur} />
                     </div>
 
@@ -52,7 +53,7 @@ const AddDog = () => {
 
                     <div className={styles.formContainer}>
                         <label htmlFor="maxHeight">Max Height In CM: </label>
-                        <input type="number" value={form.maxHeight} name="maxHeight" min={1} id="maxHeight"
+                        <input type="number" value={form.maxHeight} name="maxHeight" min="1" id="maxHeight"
                             placeholder={"Max Height"} onChange={handleChange} onBlur={handleBlur} />
                     </div>
 
@@ -60,39 +61,37 @@ const AddDog = () => {
 
                     <div className={styles.formContainer}>
                         <label htmlFor="minWeight">Min Weight In KG: </label>
-                        <input type="number" value={form.minWeight} name="minWeight" id="minWeight" min={1}
+                        <input type="number" value={form.minWeight} name="minWeight" id="minWeight" min="1"
                             placeholder={"Min Weight"} onChange={handleChange} onBlur={handleBlur} />
                     </div>
                     <div className={styles.formContainer}>
                         <label htmlFor="maxWeight">Max Weight In KG: </label>
-                        <input type="number" value={form.maxWeight} name="maxWeight" id="maxWeight" min={1}
+                        <input type="number" value={form.maxWeight} name="maxWeight" id="maxWeight" min="1"
                             placeholder={"Max Weight"} onChange={handleChange} onBlur={handleBlur} />
                     </div>
 
                     <div className={styles.formContainer}>
                         <label htmlFor="minLife_span">Min Years Of Life: </label>
-                        <input type="number" value={form.minLife_span} name="minLife_span" id="minLife_span" min={1}
-                            placeholder={"Min Years Of Life"} onChange={handleChange} onBlur={handleBlur}
-                            />
+                        <input type="number" value={form.minLife_span} name="minLife_span" id="minLife_span" min="1"
+                            placeholder={"Min Years Of Life"} onChange={handleChange} onBlur={handleBlur} />
                     </div>
 
                     <div className={styles.formContainer}>
                         <label htmlFor="maxLife_span">Max Years Of Life: </label>
-                        <input type="number" value={form.maxLife_span} name="maxLife_span" id="maxLife_span" min={1}
-                            placeholder={"Max Years Of Life"} onChange={handleChange} onBlur={handleBlur}
-                            />
+                        <input type="number" value={form.maxLife_span} name="maxLife_span" id="maxLife_span" min="1"
+                            placeholder={"Max Years Of Life"} onChange={handleChange} onBlur={handleBlur} />
                     </div>
 
-                    <div>
-                        <label htmlFor="img">Image: </label>
-                        <input type="text" type="text" value={form.image} name="image" placeholder="Add Your Image" onChange={handleChange}/>
+                    <div className={styles.formContainer}>
+                        <label htmlFor="image">Image: </label>
+                        <input type="text" value={form.img} name="img" id="img" placeholder="Add The URL Of Your Image" onChange={handleChange} onBlur={handleBlur} />
                     </div>
 
                     <div className={styles.formContainer}>
                         <label htmlFor="temperaments">Temperaments: </label>
-                        <input type="text" value={form.temperaments} name="temperaments" placeholder="Add Your Temperaments" onChange={handleChange} onBlur={handleBlur}/>
+                        <input type="text" value={form.temperaments} name="temperaments" placeholder="Add Your Temperaments" onChange={handleChange} onBlur={handleBlur} />
                     </div>
-
+                    {loading && <Spinner/>}
                     {
                         fail ? (
                             <div className={styles.messageError}><p>{error}</p></div>
@@ -101,7 +100,7 @@ const AddDog = () => {
                         )
                     }
 
-                    <input type="submit" Value="Add" className={styles.submitButton}/>
+                    <input type="submit" value="Add" className={styles.submitButton} />
                 </form>
             </div>
         </div>

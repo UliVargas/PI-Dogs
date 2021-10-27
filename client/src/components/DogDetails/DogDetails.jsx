@@ -17,17 +17,19 @@ const DogDetails = () => {
         dispatch(fetchDogsId(id))
     }, [dispatch, id])
 
+    
+
     return (
         <>
-            {
+            { 
                 loading ? (
                     <Spinner/>
                 ) : (
 
                     <div className={styles.container}>
                         <Link to={"/home"}>
-                            <img src={arrowBack} alt=""/>
-                            Back
+                                <img src={arrowBack} alt=""/>
+                                Back
                         </Link>
                         <div className={styles.containerDetails}>
                             <div className={styles.img}>

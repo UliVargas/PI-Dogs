@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchTemperaments, fillterAll, filterByApi, filterByTemperament, filterByUser} from "../../Redux/actions";
+import {fillterAll, filterByApi, filterByTemperament, filterByUser} from "../../Redux/actions";
 import styles from "./Filter.module.css";
 
 
@@ -21,8 +21,6 @@ const Filter = () => {
             dispatch(fillterAll())
         }
     }, [filter, dispatch])
-
-    console.log(filter)
 
 
     const handleChange = async (temps) => {

@@ -2,7 +2,7 @@ const { Breed, Temperament } = require("../db");
 
 
 async function postDog(req, res) {
-    const {name, temperaments, height, weight, image, life_span} = req.body;
+    const {name, temperaments, height, weight, img, life_span} = req.body;
     const [breed, created] = await Breed.findOrCreate({
       where: {
         name: name
@@ -10,8 +10,8 @@ async function postDog(req, res) {
           defaults: {
             height,
             weight,
+            img,
             life_span,
-            image
           }
 
     })

@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { sortDogsAsc, sortDogsDesc, sortDogsHigher, sortDogsLower } from "../../Redux/actions";
 import styles from "./Order.module.css";
 
 const Order = () => {
   const dispatch = useDispatch();
   const [sort, setSort] = useState("");
-  const { breeds, loading } = useSelector((state) => state);
 
   useEffect(() => {
     if (sort === "desc") {
@@ -33,7 +32,7 @@ const Order = () => {
               defaultValue
               onChange={(e) => setSort(e.target.value)}
             >
-                <option value="" selected>Order By</option>
+                <option value="">Order By</option>
               <optgroup label="Alphabetical">
                 <option value="asc">Ascendente</option>
                 <option value="desc">Descendente</option>

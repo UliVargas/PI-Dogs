@@ -128,7 +128,7 @@ async function getDogsId(req, res) {
 
           const arrayTemps = [];
           const dbId = await Breed.findByPk(id, {include: Temperament});
-
+            console.log(dbId)
           if (dbId !== null) {
             for await(let temperament of dbId.temperaments) {
               arrayTemps.push(temperament.dataValues.name)

@@ -3,8 +3,6 @@ import axios from "axios";
 import {useSelector} from "react-redux"
 import {fetchDogs} from "../Redux/actions/index"
 
-
-
 export const useForm = (initialForm) => {
 
     const {searchResults} = useSelector(state => state);
@@ -13,11 +11,11 @@ export const useForm = (initialForm) => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState(null);
+    
     let namesArr = [];
-    {
-        for(let b of searchResults) {
-            namesArr.push(b.name)
-        }
+        
+    for(let b of searchResults) {
+    namesArr.push(b.name)        
     }
     
 
@@ -36,18 +34,22 @@ export const useForm = (initialForm) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if(form.breedName && form.minHeight && form.maxHeight && form.minWeight && form.maxWeight && form.minLife_span && form.maxLife_span) {
+        if(form.breedName && form.minHeight && form.maxHeight && form.minWeight && form.maxWeight && form.minLife_span && form.maxLife_span && form.img) {
 
             if(namesArr.find(b => b === form.breedName)) {
+                setLoading(false)
                 alert("The breed name already exists")
             } else {
                 
                 setLoading(true);
-                let res = axios.post("http://localhost:3001/dog", {name: form.breedName,
-                   height: `${form.minHeight} - ${form.maxHeight}`,
-                   weight: `${form.minWeight} - ${form.maxWeight}`,
-                   life_span: `${form.minLife_span} - ${form.maxLife_span}`,
-                   temperaments: form.temperaments?.split(",")})
+                axios.post("http://localhost:3001/dog", {
+                    name: form.breedName,
+                    height: `${form.minHeight} - ${form.maxHeight}`,
+                    weight: `${form.minWeight} - ${form.maxWeight}`,
+                    life_span: `${form.minLife_span} - ${form.maxLife_span}`,
+                    img: form.img,
+                    temperaments: form.temperaments?.split(","),
+                })
                    .then(data => {
                        setLoading(false)
                        setResponse(true);
@@ -116,8 +118,16 @@ export const useForm = (initialForm) => {
                         setError("")
                     }, 3000)
                  }
+                 if(!form.img) {
+                    setFail(true);
+                    setError('Sorry, enter a Image')
+                    setTimeout(() => {
+                        setFail(false)
+                        setError("")
+                    }, 3000)
+                 }
                  
-                 if(!form.breedName && !form.minHeight && !form.maxHeight && !form.minWeight && !form.maxWeight && !form.minLife_span && !form.maxLife_span) {
+                 if(!form.breedName && !form.minHeight && !form.maxHeight && !form.minWeight && !form.maxWeight && !form.minLife_span && !form.maxLife_span && form.img) {
                     setFail(true);
                     setError('Please complete the form')
                     setTimeout(() => {
@@ -126,6 +136,7 @@ export const useForm = (initialForm) => {
                     }, 3000)
                 }
         }
+
     };
 
 
