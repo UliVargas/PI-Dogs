@@ -27,7 +27,6 @@ const initialState = {
     searchResults: [],
     breed: "",
     temperaments: [],
-    page: 1,
 }
 
 export const DogsReducers = (state = initialState, action) => {
@@ -151,12 +150,6 @@ export const DogsReducers = (state = initialState, action) => {
             return {
                 ...state,
                 dogAdded: action.payload,
-            }
-
-        case SET_PAGE:
-            return {
-                ...state,
-                page: action.payload
             }
         default:
             return state
