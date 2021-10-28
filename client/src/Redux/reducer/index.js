@@ -19,7 +19,6 @@ const {
     FILTER_BY_USER,
     FILTER_BY_ALL,
     REMOVE_DOGS_ID,
-    SET_PAGE
 } = require("../actions/types")
 
 const initialState = {

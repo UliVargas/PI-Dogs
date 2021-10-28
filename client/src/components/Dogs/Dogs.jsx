@@ -53,7 +53,7 @@ const Dogs = () => {
                     ) : (
                         <div className={`container ${styles.container}`}>
                             <div className={styles.components}>
-                                <Search/>
+                                <Search />
                                 <Order/>
                                 <Filter/>
                             </div>

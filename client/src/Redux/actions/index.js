@@ -19,7 +19,7 @@ const {
     FILTER_BY_API,
     FILTER_BY_USER,
     FILTER_BY_ALL,
-    REMOVE_DOGS_ID
+    REMOVE_DOGS_ID,
 } = require("../actions/types")
 
 
