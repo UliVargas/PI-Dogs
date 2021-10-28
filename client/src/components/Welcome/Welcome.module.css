@@ -4,7 +4,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 30%), rgba(0, 0, 0, 30%)), url(../../img/DogWelcome.svg);
+    background-image: linear-gradient(rgba(0, 0, 0, 40%), rgba(0, 0, 0, 40%)), url(../../img/DogWelcome.svg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,7 +12,7 @@
 .Welcome {
     margin: 0 auto;
     border-radius: .5rem;
-    background-color: #00000050;
+    background-color: #00000070;
     height: 40rem;
     color: #FFFFFF;
     text-align: center;
@@ -21,6 +21,7 @@
     align-items: center;
     justify-content: center;
     line-height: 1.4;
+    padding: 0 2rem;
 }
 .Welcome h1 {
     margin-bottom: 1rem;
@@ -29,16 +30,18 @@
 .Welcome button {
     margin-top: 2rem;
     border-radius: .5rem;
-    background-color: #c37d28;
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
     color: rgb(236, 235, 235);
     border: none;
     font-size: 1.8rem;
     font-weight: 700;
     padding: 1.5rem 4rem;
-    transition: all ease-in-out .2s;
+    transition: all ease-in-out .5s;
+    cursor: pointer;
+    background-attachment: fixed;
 }
 
 .Welcome button:hover {
-    background-color: #583b1e;
-    color: #FFFFFF;
+    background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+    background-attachment: fixed;
 }

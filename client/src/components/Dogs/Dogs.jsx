@@ -15,7 +15,7 @@ const Dogs = () => {
     const dispatch = useDispatch();
     const {breeds, loading} = useSelector(state => state);
     const totalBreeds = breeds.length;
-    const [currentPage, setcurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(8);
     const [pageNumberLimit] = useState(5);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(10);
@@ -26,21 +26,27 @@ const Dogs = () => {
 
 
     useEffect(() => {
-        dispatch(fetchDogs())
-        dispatch(fetchTemperaments())
-    }, [dispatch])
+        if(breeds.length === 0) {
+            dispatch(fetchDogs())
+            dispatch(fetchTemperaments())
+        }
+    }, [dispatch, breeds.length])
 
     useEffect(() => {
         setTimeout(() => {
             dispatch(removeFetchDogsId())
-        }, 50)
+        },50)
     }, [dispatch])
+
+    const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
 
     return (
         <>
             <div>
-
                 {
                     loading ? (
                         <Spinner/>
@@ -69,10 +75,12 @@ const Dogs = () => {
                     )}
 
             </div>
-            <Pagination totalBreeds={totalBreeds} setcurrentPage={setcurrentPage} itemsPerPage={itemsPerPage}
+            <Pagination totalBreeds={totalBreeds} setCurrentPage={setCurrentPage} itemsPerPage={itemsPerPage}
                         maxPageNumberLimit={maxPageNumberLimit} minPageNumberLimit={minPageNumberLimit}
                         currentPage={currentPage} setmaxPageNumberLimit={setmaxPageNumberLimit}
-                        setminPageNumberLimit={setminPageNumberLimit} pageNumberLimit={pageNumberLimit}/>
+                        setminPageNumberLimit={setminPageNumberLimit} pageNumberLimit={pageNumberLimit}
+                        paginate={paginate}
+                        />
         </>
     )
 }

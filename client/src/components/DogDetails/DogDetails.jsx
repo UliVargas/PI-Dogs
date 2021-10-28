@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import styles from "./DogDetails.module.css";
 import {fetchDogsId} from "../../Redux/actions";
+import NotFound from "../NotFound/NotFound"
 import Spinner from '../Spinner/Spinner';
 import arrowBack from "../../img/arrow-left.svg"
 
@@ -17,11 +18,15 @@ const DogDetails = () => {
         dispatch(fetchDogsId(id))
     }, [dispatch, id])
 
-    
 
+    let validationBreed = true;
+        if(breed === "") {
+            validationBreed = false;
+        };
     return (
         <>
-            { 
+            {
+                
                 loading ? (
                     <Spinner/>
                 ) : (
@@ -45,13 +50,13 @@ const DogDetails = () => {
                                 </div>
                                 <div className={styles.detailsDates}>
                                     <p>
-                                        Height:<span> {breed.height}</span>
+                                        Height:<span> {breed.height} cm</span>
                                     </p>
                                 </div>
                                 <div className={styles.detailsDates}>
                                     <p>
                                         Weight:
-                                        <span> {breed.weight}</span>
+                                        <span> {breed.weight} Kg</span>
                                     </p>
                                 </div>
                                 <div className={styles.detailsDates}>
@@ -63,7 +68,8 @@ const DogDetails = () => {
                             </div>
                         </div>
                     </div>
-                )}
+                )
+            }
         </>
     )
 }

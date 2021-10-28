@@ -16,8 +16,8 @@
 .container a {
     padding: 1rem 2rem;
     background-color: #ffffff;
-    box-shadow: 0 0 2px 1px #ccc ;
     font-size: 1.8rem;
+    border-radius: .5rem;
 }
 
 .container a img {
@@ -26,6 +26,7 @@
 }
 
 .formBox {
+    border-radius: .5rem;
     margin-top: 3rem;
     color: #252223;
     background-color: #ffffff;
@@ -75,6 +76,7 @@
 }
 
 .submitButton {
+    border-radius: .5rem;
     border: none;
     background-color: #252223;
     padding: 1rem 3rem;

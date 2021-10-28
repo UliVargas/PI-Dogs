@@ -34,12 +34,12 @@ const Order = () => {
             >
                 <option value="">Order By</option>
               <optgroup label="Alphabetical">
-                <option value="asc">Ascendente</option>
-                <option value="desc">Descendente</option>
+                <option value="asc">A - Z</option>
+                <option value="desc">Z - A</option>
               </optgroup>
               <optgroup label="Weight">
-              <option value="low">Menor a Mayor</option>
-              <option value="hig">Mayor a Menor</option>
+              <option value="low">Lower First</option>
+              <option value="hig">Highest First</option>
               </optgroup>
             </select>
         </div>

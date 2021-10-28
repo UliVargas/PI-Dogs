@@ -10,4 +10,5 @@
 .formFilter select {
     padding: .5rem;
     border: none;
+    border-radius: .5rem;
 }

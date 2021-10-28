@@ -5,6 +5,7 @@
     max-width: 120rem;
     margin: 0 auto;
     margin-top: 10rem;
+    color: #FFF;
 }
 
 .container a {
@@ -14,7 +15,6 @@
     margin-bottom: 4rem;
     padding: 1rem;
     border: none;
-    box-shadow: 0 0 2px 1px #ccc ;
     font-size: 1.8rem;
     background-color: #ffffff;
 }
@@ -47,11 +47,16 @@
 }
 
 .img {
-    flex: 0 0 45%
+    flex: 0 0 45%;
+}
+
+.img img {
+    border-radius: .5rem;
 }
 
 .details {
-    flex: 0 0 calc(55% - 4rem);
+    margin-top: 2rem;
+    flex: 0 0 calc(55% - 10rem);
 }
 
 .img {

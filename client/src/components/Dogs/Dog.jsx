@@ -9,22 +9,24 @@ const Dog = ({name, img, temperaments, weight, id}) => {
     return (
         <div className={styles.container}>
             <Link to={`/dog/${id}`}>
-                <img src={img} alt={name}/>
-                <h4>{name}</h4>
-                <div className={styles.details}>
-                    <div className={styles.temperaments}>
-                        <p>Temperaments</p>
-                        <span>
-                            <span>{temperaments}</span>
-                        </span>
-                    </div>
-                    <div className={styles.weight}>
-                        <p>Min Weight
-                            <span> {splitWeight[0]} Kg</span>
-                        </p>
-                        <p>Max Weight
-                            <span> {splitWeight[2]} Kg</span>
-                        </p>
+                <div className={styles.containerDog}>
+                    <img src={img} alt={name} />
+                    <div className={styles.details}>
+                    <h4>{name}</h4>
+                        <div className={styles.temperaments}>
+                            <p>Temperaments</p>
+                            <span>
+                                <span>{temperaments}</span>
+                            </span>
+                        </div>
+                        <div className={styles.weight}>
+                            <p>Min Weight
+                                <span> {splitWeight[0]} Kg</span>
+                            </p>
+                            <p>Max Weight
+                                <span> {splitWeight[2]} Kg</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
 

@@ -18,14 +18,16 @@ const {
     FILTER_BY_API,
     FILTER_BY_USER,
     FILTER_BY_ALL,
-    REMOVE_DOGS_ID
+    REMOVE_DOGS_ID,
+    SET_PAGE
 } = require("../actions/types")
 
 const initialState = {
     breeds: [],
     searchResults: [],
-    breed: [],
+    breed: "",
     temperaments: [],
+    page: 1,
 }
 
 export const DogsReducers = (state = initialState, action) => {
@@ -77,10 +79,11 @@ export const DogsReducers = (state = initialState, action) => {
                 loading: true
             };
         case FETCH_TEMPERAMENTS_SUCCESS:
+          const sortTemps = action.payload.sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : a.name > b.name ? 1 : 0));
             return {
                 ...state,
                 loading: false,
-                temperaments: action.payload
+                temperaments: sortTemps
             };
         case FETCH_TEMPERAMENTS_FAILED:
             return {
@@ -148,6 +151,12 @@ export const DogsReducers = (state = initialState, action) => {
             return {
                 ...state,
                 dogAdded: action.payload,
+            }
+
+        case SET_PAGE:
+            return {
+                ...state,
+                page: action.payload
             }
         default:
             return state

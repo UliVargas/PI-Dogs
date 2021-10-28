@@ -7,22 +7,29 @@
     list-style: none;
     display: flex;
     margin: 4rem;
+    justify-content: center;
 }
 /*.pageNumbers:last-child {*/
-/*    display: none;*/
-/*}*/
-
-.pageNumbers li {
-    padding: 10px;
-    border: 1px solid white;
+    /*    display: none;*/
+    /*}*/
+    
+    .pageNumbers li {
+    border-radius: .5rem;
+    padding: 1rem;
     cursor: pointer;
     background-color: #252223;
     color: #ffffff;
 }
 
+.pageNumbers li:hover {
+    background-color: #c37d28;
+}
+
 .pageNumbers li.active {
-    background-color: white;
-    color: black;
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+    background-attachment: fixed;
+    color: #ffffff;
+    border: 1px solid #c37d28;
 }
 
 .pageNumbers li button {
@@ -32,10 +39,11 @@
     font-size: 1.5rem;
     cursor: pointer;
 }
+
 .pageNumbers li button:hover {
-    background-color: white;
-    color: black;
+    background-color: #c37d28;
 }
+
 .pageNumbers li button:focus {
     outline: none;
 }

@@ -3,9 +3,13 @@
     justify-content: flex-end;
 }
 
+.formContainer {
+    padding: 0 2rem;
+}
+
 .container {
     text-align: center;
-    padding: 0 2rem
+    border-radius: .5rem;
 }
 
 .container p {
@@ -14,6 +18,7 @@
 }
 
 .container select {
+    border-radius: .5rem;
     padding: .8rem;
     border: none;
 }

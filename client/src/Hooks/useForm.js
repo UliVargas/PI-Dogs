@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import {useSelector} from "react-redux"
 import {fetchDogs} from "../Redux/actions/index"
+import {useHistory} from "react-router-dom"
 
 export const useForm = (initialForm) => {
 
@@ -11,13 +12,14 @@ export const useForm = (initialForm) => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState(null);
-    
+    const history = useHistory();
+
     let namesArr = [];
-        
+
     for(let b of searchResults) {
-    namesArr.push(b.name)        
+    namesArr.push(b.name)
     }
-    
+
 
 
     const handleChange = (e) => {
@@ -26,7 +28,7 @@ export const useForm = (initialForm) => {
             [e.target.name]: e.target.value
         });
     };
-    
+
     const handleBlur = (e) => {
         handleChange(e);
     };
@@ -40,7 +42,7 @@ export const useForm = (initialForm) => {
                 setLoading(false)
                 alert("The breed name already exists")
             } else {
-                
+
                 setLoading(true);
                 axios.post("http://localhost:3001/dog", {
                     name: form.breedName,
@@ -56,12 +58,12 @@ export const useForm = (initialForm) => {
                        setForm(initialForm)
                        setTimeout(() => {
                            setResponse(false)
-                           fetchDogs()
+                           history.push("/home")
                        }, 3000)
                    })
                 }
         } else {
-            
+
                 if(!form.breedName) {
                     setFail(true);
                     setError('Sorry, enter a name')
@@ -126,7 +128,7 @@ export const useForm = (initialForm) => {
                         setError("")
                     }, 3000)
                  }
-                 
+
                  if(!form.breedName && !form.minHeight && !form.maxHeight && !form.minWeight && !form.maxWeight && !form.minLife_span && !form.maxLife_span && !form.img) {
                     setFail(true);
                     setError('Please complete the form')
