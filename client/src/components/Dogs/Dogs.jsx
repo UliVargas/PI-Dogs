@@ -26,11 +26,9 @@ const Dogs = () => {
 
 
     useEffect(() => {
-        if(breeds.length === 0) {
             dispatch(fetchDogs())
             dispatch(fetchTemperaments())
-        }
-    }, [dispatch, breeds.length])
+    }, [])
 
     useEffect(() => {
         setTimeout(() => {

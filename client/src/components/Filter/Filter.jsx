@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fillterAll, filterByApi, filterByTemperament, filterByUser, setPage} from "../../Redux/actions";
+import {fillterAll, filterByApi, filterByTemperament, filterByUser} from "../../Redux/actions";
 import styles from "./Filter.module.css";
 
 

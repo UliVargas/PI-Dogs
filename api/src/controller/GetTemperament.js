@@ -5,4 +5,6 @@ async function getTemperament(req, res) {
     res.json(temperament);
 }
 
+
+
 module.exports = getTemperament;

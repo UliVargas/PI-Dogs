@@ -9,16 +9,17 @@ const Welcome = () => {
 
     const dispatch = useDispatch()
     useEffect(() => {
+        console.log("hola")
         dispatch(fetchTemperaments())
-    })
+    }, [])
 
     return (
         <section className={`${styles.container}`}>
             <div className={`${styles.Welcome}`}>
-                <h1>Bienvenido a la App de Perritos</h1>
-                <h3>Aprende información y caracteristicas de nuestros peludos amigos</h3>
+                <h1>Welcome to the Puppies App</h1>
+                <h3>Learn information and characteristics of our furry friends</h3>
                 <Link to='/home'>
-                    <button>Comenzar</button>
+                    <button>Go To Home</button>
                 </Link>
             </div>
         </section>

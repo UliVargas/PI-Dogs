@@ -11,10 +11,7 @@ import NotFound from "./components/NotFound/NotFound";
 
 
 function App() {
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(fetchDogs())
-    },[dispatch])
+    
 
   return (
       <div>

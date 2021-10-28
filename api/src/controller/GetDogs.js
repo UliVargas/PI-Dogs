@@ -44,7 +44,7 @@ async function getDogs(req, res) {
           }
         }
         temperamentsApi.forEach((temp) => {
-          Temperament.findOrCreate({
+           Temperament.findOrCreate({
             where: {
               name: temp
             }

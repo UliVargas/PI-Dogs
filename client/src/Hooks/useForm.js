@@ -1,8 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import {useSelector} from "react-redux"
-import {fetchDogs} from "../Redux/actions/index"
-import {useHistory} from "react-router-dom"
+import {useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 export const useForm = (initialForm) => {
 

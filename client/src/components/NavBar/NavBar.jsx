@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import styles from './NavBar.module.css';
-import Logo from '../../img/logo2.png';
-import {clearOptions, fetchDogs} from "../../Redux/actions/";
+import Logo from '../../img/logo.png';
+import {fetchDogs} from "../../Redux/actions/";
 import { useDispatch } from 'react-redux';
 
 const Nav = () => {
