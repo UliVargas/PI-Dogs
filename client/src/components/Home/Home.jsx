@@ -1,3 +1,4 @@
+import React from "react";
 import styles from './Home.css';
 import Dogs from "../Dogs/Dogs";
 import Nav from '../NavBar/NavBar';

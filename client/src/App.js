@@ -1,11 +1,9 @@
+import React from "react";
 import {Switch, Route} from "react-router-dom";
 import Home from "./components/Home/Home";
 import Welcome  from "./components/Welcome/Welcome";
 import AddDog from "./components/AddDog/AddDog";
 import DogDetails from "./components/DogDetails/DogDetails";
-import {fetchDogs} from "./Redux/actions";
-import {useDispatch} from "react-redux";
-import {useEffect} from "react";
 import NotFound from "./components/NotFound/NotFound";
 
 

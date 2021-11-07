@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./Paginate.module.css"
 
   export const Pagination = ({totalBreeds, setCurrentPage, itemsPerPage, maxPageNumberLimit, minPageNumberLimit, currentPage, setmaxPageNumberLimit, setminPageNumberLimit, pageNumberLimit}) => {

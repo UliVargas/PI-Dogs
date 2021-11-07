@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./NotFound.module.css"
 import Err_404 from "../../img/NoHaySistema.png";
 import {Link} from 'react-router-dom';

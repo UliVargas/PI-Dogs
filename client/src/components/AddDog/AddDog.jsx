@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./AddDog.module.css";
 import arrowBack from "../../img/arrow-left.svg";
 import {Link} from "react-router-dom";
