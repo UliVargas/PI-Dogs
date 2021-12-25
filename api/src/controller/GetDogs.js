@@ -1,28 +1,18 @@
-const {
-  API_KEY
-} = process.env;
-const {
-  Breed,
-  Temperament
-} = require("../db");
-const {
-  Op
-} = require("sequelize");
+const { API_KEY } = process.env;
+const {Temperament, Breed } = require("../db")
+const { Op } = require("sequelize");
 const axios = require('axios');
 
 async function getDogs(req, res) {
 
   try {
-    const {
-      name
-    } = req.query;
+    const Breeds = []
+    const temperamentsApi = [];
+    const { name } = req.query;
     const resp = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
       .then(data => data.data);
 
     if (!name) {
-      const Breeds = []
-      const temperamentsApi = [];
-
       if (name !== null || name !== undefined) {
         for await (let element of resp) {
           Breeds.push({
@@ -34,29 +24,22 @@ async function getDogs(req, res) {
           })
         };
 
-        for (let i = 0; i < resp.length; i++) {
-          let temp = resp[i].temperament?.split(",");
-
-          for (let j = 0; j < temp?.length; j++) {
-            if (temp[j] !== "") {
-              temperamentsApi.push(temp[j].trim())
-            }
-          }
+        for ( const data of resp) {
+          const temps = data.temperament?.split(",");
+          temps?.map(e => temperamentsApi.push(e.trim()));
         }
-        temperamentsApi.forEach((temp) => {
-           Temperament.findOrCreate({
-            where: {
-              name: temp
-            }
-          })
-        })
+        
+        for (const data of temperamentsApi) {
+          const [temp, created] = await Temperament.findOrCreate({ where: { name: data } })
+        }
 
         const dbBreeds = await Breed.findAll({
           include: Temperament
         });
-        for await (let element of dbBreeds) {
+        
+        for (let element of dbBreeds) {
           let arrayTemperaments = [];
-          for await (let temp of element?.dataValues?.temperaments) {
+          for (let temp of element?.dataValues?.temperaments) {
             arrayTemperaments.push(temp.dataValues.name)
           }
           Breeds.push({
