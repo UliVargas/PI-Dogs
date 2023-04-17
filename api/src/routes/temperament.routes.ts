@@ -1,8 +1,14 @@
 import { Router } from 'express'
-import { getAllTemperaments } from '../controllers/temperaments.controller'
+import { createTemperament, getAllTemperaments } from '../controllers/temperaments.controller'
 
 const router = Router()
 
-router.get('/', getAllTemperaments)
+router
+  .get('/',
+    getAllTemperaments
+  )
+  .post('/',
+    createTemperament
+  )
 
 export default router

@@ -2,9 +2,12 @@ import { Model, Optional, STRING, UUID, UUIDV4 } from 'sequelize'
 import sequelize from '..'
 import { TemperamentEntity } from '../../../entities/temperament.entity'
 
-interface TemperamentAttributes extends Optional<TemperamentEntity, 'id'> {}
+interface TemperamentCreateAttributes extends Optional<TemperamentEntity, 'id'> {}
 
-class Temperament extends Model<TemperamentAttributes> {}
+class Temperament extends Model<TemperamentEntity, TemperamentCreateAttributes> {
+  declare id: string
+  declare name: string
+}
 
 Temperament.init({
   id: {

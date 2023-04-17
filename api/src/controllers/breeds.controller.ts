@@ -8,8 +8,11 @@ export const getAllBreeds = async (req: Request, res: Response) => {
 
 export const createBreed = async (req: Request, res: Response) => {
   const { breed, created } = await createBreedService(req.body)
-  if (!created) return res.status(200).json(breed)
-  res.status(201).json(breed)
+  let status = null
+  !created
+    ? status = 200
+    : status = 201
+  res.status(status).json(breed)
 }
 
 export const findBreedById = async (req: Request, res: Response) => {

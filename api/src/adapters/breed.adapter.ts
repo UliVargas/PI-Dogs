@@ -1,5 +1,6 @@
 import { BreedEntity } from '../entities/breed.entity'
 import { BreedAPI } from '../interfaces/breed.interface'
+import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
 
 export const breedAPIAdapter = (breed: BreedAPI): BreedEntity => {
   return {
@@ -9,6 +10,13 @@ export const breedAPIAdapter = (breed: BreedAPI): BreedEntity => {
     id: breed.id,
     image: breed.image.url,
     life_span: breed.life_span,
-    temperaments: breed.temperament?.split(',').map(temperament => temperament.trim()) ?? []
+    Temperaments: breed.temperament?.split(',').map(temperament => capitalizeFirstLetter(temperament.trim())) ?? []
+  }
+}
+
+export const breedDBAdapter = (breed: any) => {
+  return {
+    ...breed,
+    Temperaments: breed.Temperaments.map((temperament: any) => temperament.name)
   }
 }

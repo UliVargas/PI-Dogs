@@ -1,12 +1,14 @@
 import Breed from './breed.model'
 import Temperament from './temperament.model'
+import BreedTemperament from './breed_temperament.model'
 
 Breed.belongsToMany(Temperament, {
-  through: 'Breed_Temperament'
+  through: { model: BreedTemperament, unique: true }
 })
 Temperament.belongsToMany(Breed, {
-  through: 'Breed_Temperament'
+  through: { model: BreedTemperament, unique: true }
 })
 
 export const BreedModel = Breed
 export const TemperamentModel = Temperament
+export const BreedTemperamentModel = BreedTemperament

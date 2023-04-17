@@ -4,6 +4,6 @@ export interface BreedEntity {
   id: number
   name: string
   life_span: string
-  temperaments: string[]
+  Temperaments: string[]
   image: string
 }
