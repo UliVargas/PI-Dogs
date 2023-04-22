@@ -71,7 +71,20 @@ export const createBreedService = async (breedPayload: BreedEntity) => {
 }
 
 export const findBreedByIdService = async (id: string) => {
-  const breed = await findBreedByIdFromAPI(Number(id)).catch(() => null) ?? await BreedModel.findOne({ where: { id } }).catch(() => null)
+  const breed = await findBreedByIdFromAPI(Number(id))
+    .catch(() => null) ??
+  await BreedModel.findOne({
+    where: {
+      id
+    },
+    include: {
+      model: TemperamentModel,
+      attributes: ['name']
+    }
+  })
+    .then(breed => breedDBAdapter(breed?.toJSON()))
+    .catch(() => null)
+
   return breed
 }
 

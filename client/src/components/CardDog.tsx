@@ -14,7 +14,7 @@ export const CardDog: FC<Props> = ({ dog }) => {
   return (
     <Link href={`/dog/${dog.id}`}>
       <div className="card w-[300px] h-[500px] bg-base-100 shadow-xl">
-        {/* <Image src={dog.image} alt="Dog" width="250" /> */}
+        <Image src={dog.image ?? '/assets/dog.svg'} width={500} height={500} className="object-cover object-top h-64 w-96 rounded-md" alt="Dog" />
         <div className="card-body">
           <h2 className="card-title">{dog.name}</h2>
           <p>{temperaments}</p>

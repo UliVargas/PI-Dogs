@@ -1,3 +1,4 @@
+import DogProvider from '@/context/DogProvider'
 import '@/styles/globals.css'
 import { isServer } from '@/utils/isServer'
 import axios from 'axios'
@@ -10,5 +11,9 @@ const API_URL = isServer()
 axios.defaults.baseURL = API_URL
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <DogProvider>
+      <Component {...pageProps} />
+    </DogProvider>
+  )
 }

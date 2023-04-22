@@ -11,15 +11,9 @@ interface Props {
 const DogDetailtPage: NextPage<Props> = ({ dog }) => {
   return (
     <MainLayout title='Dog detail'>
-      <Image src={dog.image} width={600} height={500} alt='Dog'/>
+      <Image src={dog.image ?? '/assets/dog.svg'} width="600" height="500" alt='Dog'/>
       <h2 className='font-bold text-2xl'>{dog.name}</h2>
-      <div>
-        {
-          dog.Temperaments.map(temperament => (
-            <p key={temperament}>{temperament}</p>
-          ))
-        }
-      </div>
+      <p>{dog.Temperaments}</p>
     </MainLayout>
   )
 }
@@ -30,16 +24,22 @@ export const getStaticPaths: GetStaticPaths = async ctx => {
     paths: data.map(dog => ({
       params: { id: dog.id.toString() }
     })),
-    fallback: false
+    fallback: 'blocking'
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string }
   const { data: dog } = await axios.get(`/breeds/${id}`)
+
+  const Temperaments = dog.Temperaments.join(', ')
+  
   return {
     props: {
-      dog
+      dog: {
+        ...dog,
+        Temperaments
+      }
     }
   }
 }
