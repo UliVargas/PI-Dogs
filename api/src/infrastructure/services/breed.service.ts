@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { BreedModel, BreedTemperamentModel, TemperamentModel } from '../orm/sequelize/models/index.model'
 import { env } from '../config/env'
-import { BreedAPI } from '../interfaces/breed.interface'
+import { BreedAPI } from '../../core/interfaces/breed.interface'
 import { breedAPIAdapter, breedDBAdapter } from '../adapters/breed.adapter'
-import { BreedEntity } from '../entities/breed.entity'
+import { BreedEntity } from '../../core/entities/breed.entity'
 import { findOrCreateTemperamentService } from './temperament.service'
-import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
+import { capitalizeFirstLetter } from '../orm/sequelize/utils/capitalizeFirstLetter'
 
 export const getAllBreedsFromAPI = async (): Promise<BreedEntity[]> => {
   const { data } = await axios.get<BreedAPI[]>(`${env.API_URL}?api_key=${env.API_KEY}`)
@@ -21,7 +21,7 @@ export const findBreedByIdFromAPI = async (id: number): Promise<BreedEntity | nu
   return null
 }
 
-export const getAllBreedsService = async (name?: string): Promise<BreedEntity[] | BreedEntity> => {
+export const getAllBreedsService = async (): Promise<BreedEntity[]> => {
   const breedsAPI = await getAllBreedsFromAPI()
   const breedsDB: BreedEntity[] = (await BreedModel.findAll({
     include: {
@@ -41,11 +41,12 @@ export const getAllBreedsService = async (name?: string): Promise<BreedEntity[] 
     })
   }
 
-  if (name) {
-    return breeds.filter(breed => breed.name.toLowerCase().includes(name))
-  }
-
   return breeds
+}
+
+export const getBreedByNameService = async (name: string) => {
+  const breeds = await getAllBreedsFromAPI()
+  return breeds.filter(breed => breed.name.toLowerCase().includes(name))
 }
 
 export const createBreedService = async (breedPayload: BreedEntity) => {
@@ -99,4 +100,8 @@ export const addTemperamentToBreed = async (temperamentName: string, breedId: st
   })
 
   return breedTemperament
+}
+
+export const countService = async (): Promise<number> => {
+  return BreedModel.count()
 }

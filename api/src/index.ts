@@ -1,7 +1,7 @@
 import app from './app'
-import { env } from './config/env'
-import sequelize from './orm/sequelize'
-import { logger } from './utils/wingston'
+import { env } from './infrastructure/config/env'
+import sequelize from './infrastructure/orm/sequelize'
+import { logger } from './infrastructure/orm/sequelize/utils/wingston'
 
 sequelize
   .authenticate()

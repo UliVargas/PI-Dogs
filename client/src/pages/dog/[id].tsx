@@ -19,9 +19,9 @@ const DogDetailtPage: NextPage<Props> = ({ dog }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async ctx => {
-  const { data } = await axios.get<Dog[]>('/breeds')
+  const { data: { raw } } = await axios.get('/breeds')
   return {
-    paths: data.map(dog => ({
+    paths: raw.breeds.map((dog: Dog) => ({
       params: { id: dog.id.toString() }
     })),
     fallback: 'blocking'
@@ -30,7 +30,7 @@ export const getStaticPaths: GetStaticPaths = async ctx => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string }
-  const { data: dog } = await axios.get(`/breeds/${id}`)
+  const { data: { raw: dog } } = await axios.get(`/breeds/${id}`)
 
   const Temperaments = dog.Temperaments.join(', ')
   

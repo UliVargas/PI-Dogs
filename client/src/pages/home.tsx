@@ -21,7 +21,8 @@ const HomePage: NextPage<Props> = ({ dogs }) => {
 }
 
 export const getStaticProps: GetStaticProps = async ctx => {
-  const { data: dogs } = await axios.get('/breeds')
+  const { data: { raw } } = await axios.get('/breeds')
+  const { breeds: dogs } = raw
 
   return {
     props: {

@@ -1,6 +1,6 @@
 import { Model, Optional, STRING, UUID, UUIDV4 } from 'sequelize'
 import sequelize from '..'
-import { TemperamentEntity } from '../../../entities/temperament.entity'
+import { TemperamentEntity } from '../../../../core/entities/temperament.entity'
 
 interface TemperamentCreateAttributes extends Optional<TemperamentEntity, 'id'> {}
 

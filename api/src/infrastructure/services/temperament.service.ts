@@ -1,6 +1,6 @@
-import { TemperamentEntity } from '../entities/temperament.entity'
+import { TemperamentEntity } from '../../core/entities/temperament.entity'
 import { TemperamentModel } from '../orm/sequelize/models/index.model'
-import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
+import { capitalizeFirstLetter } from '../orm/sequelize/utils/capitalizeFirstLetter'
 
 export const getAllTemperamentsService = async (): Promise<TemperamentEntity[]> => {
   const temperaments = await TemperamentModel.findAll()

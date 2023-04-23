@@ -1,6 +1,6 @@
 import { Model, Optional, STRING, UUID, UUIDV4 } from 'sequelize'
 import sequelize from '..'
-import { BreedEntity } from '../../../entities/breed.entity'
+import { BreedEntity } from '../../../../core/entities/breed.entity'
 
 type BreedModelAttributes = Optional<BreedEntity, 'Temperaments'>
 type BreedCreationAttributes = Optional<BreedEntity, 'id' | 'image' | 'Temperaments'>

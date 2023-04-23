@@ -1,6 +1,6 @@
-import { BreedEntity } from '../entities/breed.entity'
-import { BreedAPI } from '../interfaces/breed.interface'
-import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
+import { BreedEntity } from '../../core/entities/breed.entity'
+import { BreedAPI } from '../../core/interfaces/breed.interface'
+import { capitalizeFirstLetter } from '../orm/sequelize/utils/capitalizeFirstLetter'
 
 export const breedAPIAdapter = (breed: BreedAPI): BreedEntity => {
   return {
