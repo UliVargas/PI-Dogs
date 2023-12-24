@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "alterdb": "DEBUG=app:* ts-node -r dotenv/config src/orm/sequelize/alterdb.ts dotenv_config_path=.env",
-    "dev": "nodemon -r dotenv/config ./src/index.ts dotenv_config_path=.env",
+    "alterdb": "DEBUG=app:* ts-node -r dotenv/config src/infrastructure/orm/sequelize/alterdb.ts dotenv_config_path=.env",
+    "dev": "nodemon -r dotenv/config ./src/infrastructure/server/index.ts dotenv_config_path=.env",
     "lint": "eslint \"**/*.ts\"",
     "lint:fix": "eslint \"**/*.ts\" --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "ts-node -r dotenv/config src/infrastructure/services/seed.ts dotenv_config_path=.env"
   },
   "keywords": [],
   "author": "",

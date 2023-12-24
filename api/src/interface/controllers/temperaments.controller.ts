@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
-import { FindOrCreateTemperament, GetAllTemperaments } from '../../application/useCases/temperaments'
+import { FindOrCreateTemperament, GetAllTemperaments } from '../../application/use-cases/temperaments'
 
 export const getAllTemperaments = async (req: Request, res: Response, next: NextFunction) => {
-  const { name } = req.query as { name: string }
-
-  res.req.body = await GetAllTemperaments(name)
+  const { name, page, limit } = req.query as { name: string, page: string, limit: string }
+  res.req.body = await GetAllTemperaments({ name, page, limit })
   next()
 }
 

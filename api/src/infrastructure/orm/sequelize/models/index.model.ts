@@ -1,6 +1,6 @@
 import Breed from './breed.model'
 import Temperament from './temperament.model'
-import BreedTemperament from './breed_temperament.model'
+import BreedTemperament from './breed-temperament.model'
 
 Breed.belongsToMany(Temperament, {
   through: { model: BreedTemperament, unique: true }
