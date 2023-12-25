@@ -1,7 +1,7 @@
 export interface BreedEntity {
+  id: string
   weight: string
   height: string
-  id: number
   name: string
   life_span: string
   Temperaments: string[]

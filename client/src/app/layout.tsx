@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
-import { Header } from './components/Header'
+import { Header } from '@/components/header'
+import './normalize.css'
 import './globals.css'
 
 const lato = Roboto({

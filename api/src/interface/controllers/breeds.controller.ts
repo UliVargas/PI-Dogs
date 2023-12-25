@@ -17,6 +17,7 @@ export const findBreedById = async (req: Request, res: Response, next: NextFunct
   if (!breed) {
     return res.status(404).json({})
   }
+
   res.req.body = breed
   next()
 }

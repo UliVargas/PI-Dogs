@@ -5,3 +5,7 @@ export interface Response<T> {
     pagination: Pagination;
   } & ({ [key: string]: T } | Record<string, never>);
 }
+
+export interface ResponseOne<T> {
+  raw: T
+}
