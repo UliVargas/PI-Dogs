@@ -9,6 +9,7 @@
     "lint": "eslint \"**/*.ts\"",
     "lint:fix": "eslint \"**/*.ts\" --fix",
     "test": "jest",
+    "test:co": "jest --coverage",
     "seed": "ts-node -r dotenv/config src/infrastructure/services/seed.ts dotenv_config_path=.env"
   },
   "keywords": [],
