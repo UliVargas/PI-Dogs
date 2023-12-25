@@ -9,7 +9,7 @@ export const getAllBreedsService = async ({
   name,
   page,
   limit
-}: { name: string,
+}: { name?: string,
   page: number,
   limit: number
 }): Promise<BreedEntity[]> => {
