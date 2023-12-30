@@ -5,7 +5,7 @@ export default function HomeLayout({
   children: React.ReactNode
 }) {
   return (
-    <main className='container'>
+    <main className='w-11/12 lg:w-[80rem] mx-auto'>
       {children}
     </main>
   )

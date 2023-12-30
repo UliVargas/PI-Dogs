@@ -12,9 +12,9 @@ export const getBreeds = async () => {
 export default async function HomePage() {
   const { raw: { breeds } } = await getBreeds()
   return (
-    <div>
+    <div className=''>
       <Filters />
-      <div className='breed-cards'>
+      <div className='grid  lg:grid-cols-4 gap-5 py-10'>
         {
           breeds.map((breed) => (
             <BreedCard key={breed.id} breed={breed} />
