@@ -14,43 +14,37 @@ export default async function BreedDetail({ params }: { params: { id: string } }
 
   return (
     <main className='container'>
-      <div className='breed-details'>
-        <h1>Detalles de la Raza</h1>
-        <div style={{
-          width: '600px',
-          borderRadius: '20px',
-          display: 'flex',
-          justifyContent: 'center'
-        }}>
-          <Image
-            src={breed.image}
-            alt='Imagen de la raza'
-            width={500}
-            height={400}
-            style={{
-              objectFit: 'fill',
-              maxWidth: '100%',
-              borderRadius: '20px'
-            }} />
-        </div>
-        <h2>{breed.name}</h2>
-        <div className='breed-details-info'>
-          <p><span>Peso:</span> {breed.weight} Kg</p>
-          <p><span>Años de vida:</span> {breed.life_span.replace(/\s*years\s*/, '')} Años</p>
-          <p><span>Altura:</span> {breed.height} CM</p>
-        </div>
-        <div style={{
-          width: '500px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: '10px'
-        }}>
-          {
-            breed.Temperaments.map((temperament) => (
-              <Badge key={temperament}>{temperament}</Badge>
-            ))
-          }
+      <div className='breed-details-container'>
+        <div className='breed-details'>
+          <h1>Detalles de la Raza</h1>
+          <div style={{
+            width: '100%',
+            borderRadius: '20px',
+            display: 'flex',
+            justifyContent: 'center'
+          }}>
+            
+            <Image
+              src={breed.image}
+              alt='Imagen de la raza'
+              width={500}
+              height={400}
+              className='image'
+            />
+          </div>
+          <h2>{breed.name}</h2>
+          <div className='breed-details-info'>
+            <p><span>Peso:</span> {breed.weight} Kg</p>
+            <p><span>Años de vida:</span> {breed.life_span.replace(/\s*years\s*/, '')} Años</p>
+            <p><span>Altura:</span> {breed.height} CM</p>
+          </div>
+          <div className='temperaments'>
+            {
+              breed.Temperaments.map((temperament) => (
+                <Badge key={temperament}>{temperament}</Badge>
+              ))
+            }
+          </div>
         </div>
       </div>
     </main>

@@ -1,34 +1,17 @@
-'use client'
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Navbar } from './navbar';
 
 export const Header = () => {
-  const [isHeaderFixed, setIsHeaderFixed] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const newPercentage = (scrollPosition / window.innerHeight) * 100;
-      setIsHeaderFixed(newPercentage > 12);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
     <header
-      className={`header-container ${isHeaderFixed && 'fixed'}`}
+      className='h-26 border border-red-600'
     >
-      <div className={'header-content'}>
-        <div className={'logo-container'}>
+      <div className='flex justify-around items-center'>
+        <div className='w-[100px]'>
           <Link href='/home'>
-            <Image src='/logo.png' className={'logo'} width={294} height={283} alt='Logo' />
+            <Image src='/logo.png' className='w-full' width={294} height={283} alt='Logo' />
           </Link>
         </div>
         <Navbar />

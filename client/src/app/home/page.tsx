@@ -12,7 +12,7 @@ export const getBreeds = async () => {
 export default async function HomePage() {
   const { raw: { breeds } } = await getBreeds()
   return (
-    <div className='cards-container'>
+    <div>
       <Filters />
       <div className='breed-cards'>
         {
@@ -20,7 +20,7 @@ export default async function HomePage() {
             <BreedCard key={breed.id} breed={breed} />
           ))
         }
-      SF</div>
+      </div>
     </div>
   )
 }

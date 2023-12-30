@@ -2,7 +2,7 @@
 import { ChangeEvent, useState } from 'react'
 import { BiSearchAlt } from "react-icons/bi";
 
-export const SearchBar = () => {
+export const SearchBar = ({ classes }: { classes?: string }) => {
   const [search, setSearch] = useState('')
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -10,7 +10,7 @@ export const SearchBar = () => {
   }
 
   return (
-    <div className='search-container'>
+    <div className={`search-container ${classes}`}>
       <input type='text'
         value={search}
         placeholder='Buscar raza...'

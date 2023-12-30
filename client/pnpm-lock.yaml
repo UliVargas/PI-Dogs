@@ -29,7 +29,7 @@ devDependencies:
     specifier: ^18
     version: 18.2.18
   autoprefixer:
-    specifier: ^10.0.1
+    specifier: ^10.4.16
     version: 10.4.16(postcss@8.4.32)
   daisyui:
     specifier: ^4.4.20
@@ -41,10 +41,10 @@ devDependencies:
     specifier: 14.0.4
     version: 14.0.4(eslint@8.56.0)(typescript@5.3.3)
   postcss:
-    specifier: ^8
+    specifier: ^8.4.32
     version: 8.4.32
   tailwindcss:
-    specifier: ^3.3.0
+    specifier: ^3.3.6
     version: 3.3.6
   typescript:
     specifier: ^5
