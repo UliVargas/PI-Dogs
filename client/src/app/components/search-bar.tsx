@@ -10,14 +10,14 @@ export const SearchBar = ({ classes }: { classes?: string }) => {
   }
 
   return (
-    <div className={`search-container ${classes}`}>
+    <div className='border rounded-md flex items-center py-1 px-2 focus-within:border-emerald-600'>
       <input type='text'
         value={search}
         placeholder='Buscar raza...'
         onChange={handleChange}
-        className='search-input'
+        className='flex-1 p-2 focus-visible:outline-none'
       />
-      <BiSearchAlt className='search-icon' />
+      <BiSearchAlt className='w-7 h-7 text-gray-500 cursor-pointer hover:text-emerald-600 hover:scale-105' />
     </div>
   )
 }

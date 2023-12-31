@@ -4,26 +4,23 @@ import { Button } from './button'
 interface Routes {
   href: string
   label: string
+  icon?: string
   button?: boolean
 }
 
 const routes: Routes[] = [
   {
     href: '/home',
-    label: 'Inicio'
-  },
-  {
-    href: '/crear-raza',
-    label: 'Crear Nueva Raza',
+    label: 'Crear Raza',
     button: true
   }
 ]
 export const Navbar = () => {
   return (
-    <nav className='nav'>
+    <nav>
       {
         routes.map(({ href, label, button }) => (
-          <Link key={href} href={href}>
+          <Link key={href} href={href} className='hover:text-emerald-600'>
             {
               button ? (
                 <Button>{label}</Button>

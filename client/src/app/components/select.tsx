@@ -14,11 +14,13 @@ export const Select = ({ label, options }: { label: string; options: Options[] }
   }
 
   return (
-    <div className='select-container'>
+    <div className='grid grid-flow-row'>
       <label>
         {label}
       </label>
-      <select onChange={handleChange} className='select'>
+      <select onChange={handleChange}
+        className='px-4 py-1.5 bg-emerald-600 text-white border rounded'
+      >
         {
           options.map(({ label, value }) => (
             <option key={label} value={value}>

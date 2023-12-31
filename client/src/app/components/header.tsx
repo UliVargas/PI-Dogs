@@ -6,12 +6,12 @@ export const Header = () => {
 
   return (
     <header
-      className='h-26 border border-red-600'
+      className='h-24 shadow py-3'
     >
-      <div className='flex justify-around items-center'>
-        <div className='w-[100px]'>
+      <div className='flex xl:w-[75rem] mx-auto justify-between gap-10 items-center px-10 xl:px-0'>
+        <div>
           <Link href='/home'>
-            <Image src='/logo.png' className='w-full' width={294} height={283} alt='Logo' />
+            <Image src='/logo.png' className='lg:w-20' width={65} height={60} alt='Logo de Dogs App' />
           </Link>
         </div>
         <Navbar />

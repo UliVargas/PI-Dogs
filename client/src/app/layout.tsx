@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
-import { Roboto } from 'next/font/google'
-import { Header } from '@/components/header'
-import './normalize.css'
+import { Onest } from 'next/font/google'
+import { Header } from '@/app/components/header'
 import './globals.css'
 
-const lato = Roboto({
+const onest = Onest({
   subsets: ['latin'],
   weight: ["400", "700", "900"]
 })
@@ -20,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={lato.className}>
+      <body className={onest.className}>
         <Header />
         {children}
       </body>
