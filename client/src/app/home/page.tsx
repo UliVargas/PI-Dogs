@@ -1,7 +1,7 @@
 import { BreedEntity } from "@/app/interfaces/breed-entity.interface"
-import { BreedCard } from "@/app/components/breed-card"
+import { BreedCard } from "@/components/breed-card"
 import { Response } from '../interfaces/response.interface'
-import { Filters } from '@/app/components/filters'
+import { Filters } from '@/components/filters'
 
 export const getBreeds = async () => {
   const breeds: Response<BreedEntity[]> = await fetch(`${process.env.API_BASE_URL}/breeds?page=1&limit=9`)

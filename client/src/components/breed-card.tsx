@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export const BreedCard = ({ breed }: { breed: BreedEntity }) => {
   return (
-    <div className='xl:w-96 rounded-lg h-[510px] shadow-lg'>
+    <div className='xl:w-96 rounded-lg h-[510px] shadow-lg bg-neutral-50'>
       <Link href={`/breed/${breed.id}`} className='flex flex-col gap-2'>
         <Image
           src={breed.image}

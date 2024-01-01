@@ -1,7 +1,8 @@
-import { Badge } from '@/app/components/badge'
+import { Badge } from '@/components/badge'
 import { BreedEntity } from '@/app/interfaces/breed-entity.interface'
 import { ResponseOne } from '@/app/interfaces/response.interface'
 import Image from 'next/image'
+import { Button } from '@/components/button'
 
 export const getBreedById = async (breedId: string) => {
   const breeds: ResponseOne<BreedEntity> = await fetch(`${process.env.API_BASE_URL}/breeds/${breedId}`)
@@ -15,8 +16,15 @@ export default async function BreedDetail({ params }: { params: { id: string } }
   return (
     <main className='w-11/12 mx-auto flex justify-center items-center h-[calc(100vh-6rem)]'>
       <div>
-        <h1 className='text-4xl py-8 text-center'>Detalles de la Raza</h1>
-        <div className='flex flex-col gap-10 justify-center items-center pb-14'>
+        <div className='flex justify-center items-center gap-10'>
+          <Button className='hidden lg:block bg-transparent hover:scale-110 hover:bg-transparent'>
+            <svg className="w-8 h-8 text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
+            </svg>
+          </Button>
+          <h1 className='text-4xl py-8 text-center'>Detalles de la Raza</h1>
+        </div>
+        <div className='flex flex-col gap-10 justify-center items-center p-6 lg:p-14 border-2 rounded-md bg-neutral-50'>
           <Image
             src={breed.image}
             alt='Imagen de la raza'
