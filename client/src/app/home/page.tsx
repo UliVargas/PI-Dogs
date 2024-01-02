@@ -9,8 +9,11 @@ export const getBreeds = async () => {
   return breeds
 }
 
-export default async function HomePage() {
+export default async function HomePage({ searchParams }: { searchParams: {
+  search: string
+}}) {  
   const { raw: { breeds } } = await getBreeds()
+  
   return (
     <div>
       <Filters />

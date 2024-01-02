@@ -22,7 +22,6 @@ const filtered: Options[] = [
     value: 'height'
   }
 ]
-
 export const Filters = () => {
   return (
     <div className='hidden md:flex gap-6 items-center justify-center mt-10'>
