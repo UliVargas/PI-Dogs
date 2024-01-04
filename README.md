@@ -67,7 +67,6 @@ __IMPORTANTE__: Para las funcionalidades de filtrado y ordenamiento NO pueden ut
 ### Únicos Endpoints/Flags que pueden utilizar
 
   - GET https://api.thedogapi.com/v1/breeds
-  - GET https://api.thedogapi.com/v1/breeds/search?q={raza_perro}
 
 ### Requerimientos mínimos:
 
