@@ -1,20 +1,26 @@
 {
   "env": {
     "node": true,
-    "es6": true,
-    "mocha": true
+    "es2021": true,
+    "jest/globals": true
   },
-  "extends": "airbnb/base",
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "moduleDirectory": ["src", "node_modules"]
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "jest"],
+  "extends": ["standard", "plugin:jest/recommended"],
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "jest/no-disabled-tests": "off"
+  },
+  "overrides": [
+    {
+      "files": ["test/**"],
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/recommended"],
+      "rules": {
+        "jest/prefer-expect-assertions": "off",
+        "jest/no-disabled-tests": "off"
       }
     }
-  },
-  "rules": {
-     "no-underscore-dangle": 0,
-     "no-param-reassign": 0,
-     "import/no-unresolved": 0
-   }
+  ]
 }
