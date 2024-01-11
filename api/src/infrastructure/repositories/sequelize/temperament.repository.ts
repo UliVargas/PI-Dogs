@@ -8,23 +8,24 @@ export const getAllTemperamentsService = async ({
   page,
   limit
 }: {
-  name: string,
   page: number,
   limit: number
+  name?: string,
 }): Promise<TemperamentEntity[]> => {
   let where: WhereOptions = {}
 
   if (name) {
     where = {
       name: {
-        [Op.iLike]: `${name}%`
+        [Op.iLike]: `%${name}%`
       }
     }
   }
+
   const temperaments = await TemperamentModel.findAll({
-    where,
     offset: (page - 1) * limit,
-    limit
+    limit,
+    where
   })
   return temperaments.map(temperament => temperament.toJSON())
 }

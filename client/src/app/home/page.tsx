@@ -1,19 +1,23 @@
-import { BreedEntity } from "@/app/interfaces/breed-entity.interface"
 import { BreedCard } from "@/components/breed-card"
-import { Response } from '../interfaces/response.interface'
 import { Filters } from '@/components/filters'
+import { api } from '@/api'
+import { Pagination } from '@/components/pagination'
 
-export const getBreeds = async () => {
-  const breeds: Response<BreedEntity[]> = await fetch(`${process.env.API_BASE_URL}/breeds?page=1&limit=9`)
-    .then(data => data.json())
-  return breeds
-}
 
-export default async function HomePage({ searchParams }: { searchParams: {
-  search: string
-}}) {  
-  const { raw: { breeds } } = await getBreeds()
+
+export default async function HomePage({ searchParams: { search, temperament, sort } }: {
+  searchParams: {
+    search: string
+    temperament: string
+    sort: string
+  }
+}) {  
+  let { raw: { breeds } } = await api.breed.getBreeds({ breedName: search, sort })
+  breeds = temperament ? breeds.filter(breed => breed.Temperaments[temperament]) : breeds
+
+  console.log(breeds);
   
+
   return (
     <div>
       <Filters />
@@ -24,6 +28,7 @@ export default async function HomePage({ searchParams }: { searchParams: {
           ))
         }
       </div>
+      <Pagination totalPages={10} />
     </div>
   )
 }

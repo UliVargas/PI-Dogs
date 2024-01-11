@@ -2,8 +2,10 @@ import { NextFunction, Request, Response } from 'express'
 import { GetAllBreeds, FindBreedById, CreateBreed } from '../../application/use-cases/breeds'
 
 export const getAllBreeds = async (req: Request, res: Response, next: NextFunction) => {
-  const { name, page, limit } = req.query as { name: string, page: string, limit: string }
-  res.req.body = await GetAllBreeds({ name, page, limit })
+  console.log({ req: req.query })
+
+  const { name, page, limit, sort } = req.query as { name: string, page: string, limit: string, sort: 'ASC' | 'DESC' }
+  res.req.body = await GetAllBreeds({ name, page, limit, sort })
   next()
 }
 

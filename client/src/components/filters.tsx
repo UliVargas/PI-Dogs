@@ -4,11 +4,11 @@ import { Options, Select } from './select'
 const sorted: Options[] = [
   {
     label: 'A - Z',
-    value: 'Asc'
+    value: 'ASC'
   },
   {
     label: 'Z - A',
-    value: 'Desc'
+    value: 'DESC'
   }
 ]
 

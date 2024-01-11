@@ -7,6 +7,7 @@ const onest = Onest({
   subsets: ['latin'],
   weight: ["400", "700", "900"]
 })
+
 export const metadata: Metadata = {
   title: 'Dog App',
   description: 'Aplicación de descrición de razas de perros',

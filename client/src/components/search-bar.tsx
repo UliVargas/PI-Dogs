@@ -1,16 +1,17 @@
 'use client'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 import { BiSearchAlt } from "react-icons/bi";
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { Button } from './button';
+import { useDebouncedCallback } from 'use-debounce'
 
 export const SearchBar = ({ classes }: { classes?: string }) => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
 
-  const handleSearch = (term: string) => {
-    const params = new URLSearchParams(searchParams)
+  const handleSearch = useDebouncedCallback((term: string) => {
+    const params = new URLSearchParams(Array.from(searchParams.entries()));
     if(term) {
       params.set('search', term)
     } else {
@@ -18,14 +19,14 @@ export const SearchBar = ({ classes }: { classes?: string }) => {
     }
 
     replace(`${pathname}?${params.toString()}`)
-  }
+  }, 500)
 
   return (
     <div className='border-2 rounded-md flex items-center py-1 px-2 focus-within:border-emerald-600'>
       <input type='text'
         className='flex-1 p-2 focus-visible:outline-none bg-transparent'
         placeholder='Buscar raza...'
-        defaultValue={searchParams.get('search')?.toString()}
+        // defaultValue={searchParams.get('search')?.toString()}
         onChange={(event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value)}
 
       />
