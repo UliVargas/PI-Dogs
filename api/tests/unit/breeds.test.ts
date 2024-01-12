@@ -13,13 +13,15 @@ describe('breedService', () => {
 
       const result = await GetAllBreeds({
         limit: '10',
-        page: '1'
+        page: '1',
+        sort: 'ASC'
       })
 
       expect(breedCountMock).toHaveBeenCalled()
       expect(getAllBreedsMock).toHaveBeenCalledWith({
         page: 1,
-        limit: 10
+        limit: 10,
+        sort: 'ASC'
       })
       expect(result).toEqual({
         pagination: {
@@ -39,13 +41,15 @@ describe('breedService', () => {
 
       const result = await GetAllBreeds({
         limit: '10',
-        page: '1'
+        page: '1',
+        sort: 'ASC'
       })
 
       expect(breedCountMock).toHaveBeenCalled()
       expect(getAllBreedsMock).toHaveBeenCalledWith({
         page: 1,
-        limit: 10
+        limit: 10,
+        sort: 'ASC'
       })
       expect(result).toEqual({
         pagination: {
