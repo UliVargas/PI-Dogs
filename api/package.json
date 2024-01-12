@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "alterdb": "DEBUG=app:* ts-node -r dotenv/config src/infrastructure/orm/sequelize/alterdb.ts dotenv_config_path=.env",
+    "build": "tsc",
     "dev": "nodemon -r dotenv/config ./src/infrastructure/server/index.ts dotenv_config_path=.env",
-    "lint": "eslint \"**/*.ts\"",
     "lint:fix": "eslint \"**/*.ts\" --fix",
-    "test": "jest",
+    "lint": "eslint \"**/*.ts\"",
+    "seed": "ts-node -r dotenv/config src/infrastructure/services/seed.ts dotenv_config_path=.env",
+    "start": "nodemon -r dotenv/config ./dist/src/infrastructure/server/index.js dotenv_config_path=.env",
     "test:co": "jest --coverage",
-    "seed": "ts-node -r dotenv/config src/infrastructure/services/seed.ts dotenv_config_path=.env"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
