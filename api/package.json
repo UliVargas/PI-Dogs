@@ -10,7 +10,7 @@
     "lint:fix": "eslint \"**/*.ts\" --fix",
     "lint": "eslint \"**/*.ts\"",
     "seed": "ts-node -r dotenv/config src/infrastructure/services/seed.ts dotenv_config_path=.env",
-    "start": "nodemon -r dotenv/config ./dist/src/infrastructure/server/index.js dotenv_config_path=.env",
+    "start": "nodemon -r dotenv/config ./dist/infrastructure/server/index.js dotenv_config_path=.env",
     "test:co": "jest --coverage",
     "test": "jest"
   },
