@@ -5,7 +5,7 @@ const {
   DB_NAME,
   DB_PASSWORD,
   DB_USER,
-  HOST
+  DB_HOST
 } = env
 
 export const config = {
@@ -13,5 +13,5 @@ export const config = {
   database: DB_NAME ?? '',
   username: DB_USER ?? '',
   password: DB_PASSWORD ?? '',
-  host: HOST ?? ''
+  host: DB_HOST ?? ''
 }
