@@ -1,16 +1,26 @@
 'use client'
-import { useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { ChangeEvent, FC } from 'react'
 
 export interface Options {
   label: string
   value: string
 }
 
-export const Select = ({ label, options }: { label: string; options: Options[] }) => {
-  const [selected, setSelected] = useState('')
+export const Select: FC<{ label: string; options: Options[] }> = ({ label, options }) => {
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  const pathname = usePathname();
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelected(event.target.value)
+  const handleChange = (value: string) => {
+    const params = new URLSearchParams(Array.from(searchParams.entries()));
+    if(value === 'DESC' || value === 'ASC') {
+      params.set('sort', value)
+    } else {
+      params.set('filter', value)
+    }
+
+    replace(`${pathname}?${params.toString()}`)
   }
 
   return (
@@ -18,7 +28,8 @@ export const Select = ({ label, options }: { label: string; options: Options[] }
       <label>
         {label}
       </label>
-      <select onChange={handleChange}
+      <select
+        onChange={(event: ChangeEvent<HTMLSelectElement>) => handleChange(event.target.value)}
         className='px-4 py-1.5 bg-emerald-600 text-white border rounded'
       >
         {

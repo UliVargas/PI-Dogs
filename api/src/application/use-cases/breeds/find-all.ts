@@ -16,10 +16,12 @@ interface Response {
 export default async ({
   name,
   page = '1',
-  limit = '10'
+  limit = '10',
+  sort = 'ASC'
 }: { name?: string,
   page: string,
-  limit: string
+  limit: string,
+  sort: 'ASC' | 'DESC'
 }): Promise<Response> => {
   const totalCount = await breedCountService()
 
@@ -30,7 +32,7 @@ export default async ({
     totalPages
   } = pagination({ page, limit, totalCount })
 
-  const breeds = await getAllBreedsService({ name, page: currentPage, limit: parseInt(limit, 10) || 10 })
+  const breeds = await getAllBreedsService({ name, page: currentPage, limit: parseInt(limit, 10) || 10, sort })
 
   return {
     pagination: {

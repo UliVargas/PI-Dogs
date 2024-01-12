@@ -1,17 +1,12 @@
 import { Badge } from '@/components/badge'
-import { BreedEntity } from '@/app/interfaces/breed-entity.interface'
-import { ResponseOne } from '@/app/interfaces/response.interface'
 import Image from 'next/image'
 import { Button } from '@/components/button'
+import { api } from '@/api'
 
-export const getBreedById = async (breedId: string) => {
-  const breeds: ResponseOne<BreedEntity> = await fetch(`${process.env.API_BASE_URL}/breeds/${breedId}`)
-    .then(data => data.json())
-  return breeds
-}
+
 
 export default async function BreedDetail({ params }: { params: { id: string } }) {
-  const { raw: breed } = await getBreedById(params.id)
+  const { raw: breed } = await api.breed.getBreedById(params.id)
 
   return (
     <main className='w-11/12 mx-auto flex justify-center items-center h-[calc(100vh-6rem)]'>

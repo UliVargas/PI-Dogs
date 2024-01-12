@@ -8,16 +8,19 @@ import { Op } from 'sequelize'
 export const getAllBreedsService = async ({
   name,
   page,
-  limit
-}: { name?: string,
+  limit,
+  sort = 'ASC'
+}: {
+  name?: string,
   page: number,
-  limit: number
+  limit: number,
+  sort: 'ASC' | 'DESC'
 }): Promise<BreedEntity[]> => {
   let where = {}
   if (name) {
     where = {
       name: {
-        [Op.iLike]: `${name}%`
+        [Op.iLike]: `%${name}%`
       }
     }
   }
@@ -29,7 +32,8 @@ export const getAllBreedsService = async ({
     },
     where,
     offset: (page - 1) * limit,
-    limit
+    limit,
+    order: [['name', sort]]
   }).then(data => data.map(breed => breedDBAdapter(breed.toJSON())))
 }
 

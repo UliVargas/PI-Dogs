@@ -17,9 +17,10 @@ export default async ({
   name,
   page = '1',
   limit = '10'
-}: { name: string,
+}: {
   page: string,
   limit: string
+  name?: string,
 }): Promise<Response> => {
   const totalCount = await temperamentCountService()
   const {
