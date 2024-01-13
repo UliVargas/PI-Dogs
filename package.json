@@ -1,0 +1,19 @@
+{
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@s-ui/mono": "^2.43.0"
+  },
+  "name": "pi-dogs",
+  "description": "<p align=\"left\">   <img height=\"200\" src=\"./dog.png\" /> </p>",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "co": "sui-mono commit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
