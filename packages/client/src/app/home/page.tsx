@@ -13,10 +13,6 @@ export default async function HomePage({ searchParams: { search, temperament, so
   }
 }) {  
   let { raw: { breeds } } = await api.breed.getBreeds({ breedName: search, sort })
-  breeds = temperament ? breeds.filter(breed => breed.Temperaments[temperament]) : breeds
-
-  console.log(breeds);
-  
 
   return (
     <div>
