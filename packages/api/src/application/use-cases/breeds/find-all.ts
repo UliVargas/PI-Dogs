@@ -17,11 +17,14 @@ export default async ({
   name,
   page = '1',
   limit = '10',
-  sort = 'ASC'
-}: { name?: string,
+  sort = 'ASC',
+  temperamentName
+}: {
+  name?: string,
   page: string,
   limit: string,
   sort: 'ASC' | 'DESC'
+  temperamentName: string
 }): Promise<Response> => {
   const totalCount = await breedCountService()
 
@@ -32,7 +35,7 @@ export default async ({
     totalPages
   } = pagination({ page, limit, totalCount })
 
-  const breeds = await getAllBreedsService({ name, page: currentPage, limit: parseInt(limit, 10) || 10, sort })
+  const breeds = await getAllBreedsService({ name, page: currentPage, limit: parseInt(limit, 10) || 10, sort, temperamentName })
 
   return {
     pagination: {

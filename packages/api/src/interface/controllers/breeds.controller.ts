@@ -4,8 +4,8 @@ import { GetAllBreeds, FindBreedById, CreateBreed } from '../../application/use-
 export const getAllBreeds = async (req: Request, res: Response, next: NextFunction) => {
   console.log({ req: req.query })
 
-  const { name, page, limit, sort } = req.query as { name: string, page: string, limit: string, sort: 'ASC' | 'DESC' }
-  res.req.body = await GetAllBreeds({ name, page, limit, sort })
+  const { name, page, limit, sort, temperamentName } = req.query as { name: string, page: string, limit: string, sort: 'ASC' | 'DESC', temperamentName: string }
+  res.req.body = await GetAllBreeds({ name, page, limit, sort, temperamentName })
   next()
 }
 

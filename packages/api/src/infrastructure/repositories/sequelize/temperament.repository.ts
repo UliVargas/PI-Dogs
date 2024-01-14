@@ -4,9 +4,7 @@ import { TemperamentModel } from '../../orm/sequelize/models/index.model'
 import { capitalizeFirstLetter } from '../../orm/sequelize/utils/capitalizeFirstLetter'
 
 export const getAllTemperamentsService = async ({
-  name,
-  page,
-  limit
+  name
 }: {
   page: number,
   limit: number
@@ -23,8 +21,6 @@ export const getAllTemperamentsService = async ({
   }
 
   const temperaments = await TemperamentModel.findAll({
-    offset: (page - 1) * limit,
-    limit,
     where
   })
   return temperaments.map(temperament => temperament.toJSON())

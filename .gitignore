@@ -110,3 +110,4 @@ package-lock.json
 
 .nx/installation
 .nx/cache
+.DS_Store

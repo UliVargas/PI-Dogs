@@ -8,7 +8,7 @@ import { BreedModel, BreedTemperamentModel, TemperamentModel } from './models/in
 
 export default async function Seed () {
   sequelize
-    .authenticate()
+    .sync({ force: true })
     .then(() => {
       logger.log('warn', 'Connection to the database has been established successfully.')
     })

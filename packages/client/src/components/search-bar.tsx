@@ -5,7 +5,7 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { Button } from './button';
 import { useDebouncedCallback } from 'use-debounce'
 
-export const SearchBar = ({ classes }: { classes?: string }) => {
+export const SearchBar = () => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -22,11 +22,11 @@ export const SearchBar = ({ classes }: { classes?: string }) => {
   }, 500)
 
   return (
-    <div className='border-2 rounded-md flex items-center py-1 px-2 focus-within:border-emerald-600'>
+    <div className='border-2 rounded-md flex items-center focus-within:border-emerald-600'>
       <input type='text'
         className='flex-1 p-2 focus-visible:outline-none bg-transparent'
         placeholder='Buscar raza...'
-        // defaultValue={searchParams.get('search')?.toString()}
+        defaultValue={searchParams.get('search')?.toString()}
         onChange={(event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value)}
 
       />

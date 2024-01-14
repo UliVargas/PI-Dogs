@@ -10,8 +10,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "co": "sui-mono commit",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "co": "sui-mono commit"
   },
   "keywords": [],
   "author": "",

@@ -1,3 +1,4 @@
+import { TemperamentEntity } from '../../core/entities/temperament.entity'
 import { BreedAPI } from '../../core/interfaces/breed.interface'
 import { capitalizeFirstLetter } from '../orm/sequelize/utils/capitalizeFirstLetter'
 
@@ -15,6 +16,6 @@ export const breedAPIAdapter = (breed: BreedAPI) => {
 export const breedDBAdapter = (breed: any) => {
   return {
     ...breed,
-    Temperaments: breed.Temperaments.map((temperament: any) => temperament.name)
+    Temperaments: breed.Temperaments.map((temperament: TemperamentEntity) => temperament.name).sort((a: any, b: any) => a < b ? -1 : 0)
   }
 }

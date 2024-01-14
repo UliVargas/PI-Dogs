@@ -9,12 +9,14 @@ export const getAllBreedsService = async ({
   name,
   page,
   limit,
-  sort = 'ASC'
+  sort = 'ASC',
+  temperamentName
 }: {
   name?: string,
   page: number,
   limit: number,
   sort: 'ASC' | 'DESC'
+  temperamentName: string
 }): Promise<BreedEntity[]> => {
   let where = {}
   if (name) {
@@ -28,6 +30,7 @@ export const getAllBreedsService = async ({
   return await BreedModel.findAll({
     include: {
       model: TemperamentModel,
+      order: [['name', 'ASC']],
       attributes: ['name']
     },
     where,
