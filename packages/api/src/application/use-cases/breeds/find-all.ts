@@ -1,5 +1,7 @@
 import { BreedEntity } from '../../../core/entities/breed.entity'
-import { breedCountService, getAllBreedsService } from '../../../infrastructure/repositories/sequelize/breed.repository'
+import { TemperamentEntity } from '../../../core/entities/temperament.entity'
+import { getAllTemperamentsService } from '../../../infrastructure/repositories/sequelize'
+import { getAllBreedsService } from '../../../infrastructure/repositories/sequelize/breed.repository'
 import { pagination } from '../../../infrastructure/utils/pagination'
 
 interface Response {
@@ -26,7 +28,18 @@ export default async ({
   sort: 'ASC' | 'DESC'
   temperament: string
 }): Promise<Response> => {
-  const totalCount = await breedCountService()
+  let breeds: BreedEntity[] = []
+  let totalCount = 0
+
+  if (temperament) {
+    const resp: any = await getAllTemperamentsService({ page: Number(page), limit: parseInt(limit, 10) || 10, name: temperament })
+    breeds = resp.temperaments?.flatMap((temperament: TemperamentEntity) => temperament.Breeds) ?? []
+    totalCount = breeds.length
+  } else {
+    const resp = await getAllBreedsService({ name, page: Number(page), limit: parseInt(limit, 10) || 10, sort, temperament })
+    breeds = resp.breeds
+    totalCount = resp.count
+  }
 
   const {
     currentPage,
@@ -34,8 +47,6 @@ export default async ({
     previousPage,
     totalPages
   } = pagination({ page, limit, totalCount })
-
-  const breeds = await getAllBreedsService({ name, page: currentPage, limit: parseInt(limit, 10) || 10, sort, temperament })
 
   return {
     pagination: {

@@ -9,7 +9,7 @@ export const getAllTemperamentsService = async ({
   page: number,
   limit: number
   name?: string,
-}): Promise<TemperamentEntity[]> => {
+}): Promise<{ temperaments: TemperamentEntity[], count: number }> => {
   let where: WhereOptions = {}
 
   if (name) {
@@ -27,10 +27,18 @@ export const getAllTemperamentsService = async ({
       through: { attributes: [] }
     }
   })
-  return temperaments.map(temperament => temperament.toJSON())
+
+  const count = await TemperamentModel.count({
+    where
+  })
+
+  return {
+    temperaments: temperaments.map(temperament => temperament.toJSON()),
+    count
+  }
 }
 
-export const findOrCreateTemperamentService = async (name: string): Promise<{created: boolean, temperament: TemperamentEntity}> => {
+export const findOrCreateTemperamentService = async (name: string): Promise<{ created: boolean, temperament: Omit<TemperamentEntity, 'Breeds'> }> => {
   const [temperament, created] = await TemperamentModel.findOrCreate({
     where: {
       name: capitalizeFirstLetter(name)
@@ -41,8 +49,4 @@ export const findOrCreateTemperamentService = async (name: string): Promise<{cre
     created,
     temperament
   }
-}
-
-export const temperamentCountService = () => {
-  return TemperamentModel.count()
 }

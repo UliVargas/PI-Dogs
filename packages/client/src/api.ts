@@ -17,24 +17,13 @@ export const api = {
         .then(data => data.json())
       return breeds
     },
-    getBreeds: async ({ page = '1', limit = '9', breedName = '', sort = 'ASC' }: Partial<BreedsProps>) => {
-      const { raw }: Response<BreedEntity[]> = await fetch(`${process.env.API_BASE_URL}/breeds?page=${page}&limit=${limit}&name=${breedName}&sort=${sort}`, {
+    getBreeds: async ({ page = '1', limit = '9', breedName = '', sort = 'ASC', temperament = '' }: Partial<BreedsProps>) => {
+      const { raw }: Response<BreedEntity[]> = await fetch(`${process.env.API_BASE_URL}/breeds?page=${page}&limit=${limit}&name=${breedName}&sort=${sort}&temperament=${temperament}`, {
         cache: 'no-store'
       })
         .then(async data => data.json())
 
       return raw.breeds
-    }
-  },
-  temperament: {
-    getTemperaments: async (temperament?: string) => {
-      const { raw }: Response<TemperamentEntity[]> = await fetch(`${process.env.API_BASE_URL}/temperaments?name=${temperament}`, {
-        cache: 'no-store'
-      })
-        .then(data => data.json())
-        console.log({ raw });
-        
-      return raw.temperaments
     }
   }
 }

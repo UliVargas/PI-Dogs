@@ -17,7 +17,7 @@ export const getAllBreedsService = async ({
   limit: number,
   sort: 'ASC' | 'DESC'
   temperament: string
-}): Promise<BreedEntity[]> => {
+}): Promise<{ breeds: BreedEntity[], count: number }> => {
   let where = {}
   if (name) {
     where = {
@@ -27,17 +27,26 @@ export const getAllBreedsService = async ({
     }
   }
 
-  return await BreedModel.findAll({
+  const breeds = await BreedModel.findAll({
+    where,
+    offset: (page - 1) * limit,
+    limit,
+    order: [['name', sort]],
     include: {
       model: TemperamentModel,
       order: [['name', 'ASC']],
       attributes: ['name']
-    },
-    where,
-    offset: (page - 1) * limit,
-    limit,
-    order: [['name', sort]]
-  }).then(data => data.map(breed => breedDBAdapter(breed.toJSON())))
+    }
+  })
+
+  const count = await BreedModel.count({
+    where
+  })
+
+  return {
+    breeds: breeds.map(breed => breedDBAdapter(breed.toJSON())),
+    count
+  }
 }
 
 export const createBreedService = async (breedPayload: BreedEntity) => {
@@ -74,8 +83,4 @@ export const addTemperamentToBreed = async (temperamentName: string, breedId: st
     }
   })
   return breedTemperament
-}
-
-export const breedCountService = async (): Promise<number> => {
-  return BreedModel.count()
 }

@@ -12,15 +12,11 @@ export default async function HomePage({ searchParams: { search, temperament, so
   }
 }) {
   const breeds = await api.breed.getBreeds({ breedName: search, sort, temperament })
-  const temperaments = await api.temperament.getTemperaments(temperament)
 
-  console.log({temperaments});
-  
-  
   
   return (
     <div>
-      <Filters temperaments={temperaments} selectOptions={{ sort, temperament }} />
+      <Filters temperaments={[]} selectOptions={{ sort, temperament }} />
       <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 py-10'>
         {
           breeds.map((breed) => (
