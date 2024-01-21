@@ -3,8 +3,6 @@ import Image from 'next/image'
 import { Button } from '@/components/button'
 import { api } from '@/api'
 
-
-
 export default async function BreedDetail({ params }: { params: { id: string } }) {
   const { raw: breed } = await api.breed.getBreedById(params.id)
 

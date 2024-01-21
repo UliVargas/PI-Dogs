@@ -18,8 +18,8 @@ export const BreedCard = ({ breed }: { breed: BreedEntity }) => {
             <h2 className='font-semibold text-xl'>{breed.name}</h2>
             <div className='flex gap-2 flex-wrap'>
               {
-                breed.Temperaments.map((temperament: string, index: number) => (
-                  <Badge key={index}>
+                breed.Temperaments.map((temperament: string) => (
+                  <Badge key={temperament}>
                     <span>{temperament}</span>
                   </Badge>
                 ))

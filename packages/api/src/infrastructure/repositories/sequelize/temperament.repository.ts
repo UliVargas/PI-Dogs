@@ -1,6 +1,6 @@
 import { Op, WhereOptions } from 'sequelize'
 import { TemperamentEntity } from '../../../core/entities/temperament.entity'
-import { TemperamentModel } from '../../orm/sequelize/models/index.model'
+import { BreedModel, TemperamentModel } from '../../orm/sequelize/models/index.model'
 import { capitalizeFirstLetter } from '../../orm/sequelize/utils/capitalizeFirstLetter'
 
 export const getAllTemperamentsService = async ({
@@ -21,7 +21,11 @@ export const getAllTemperamentsService = async ({
   }
 
   const temperaments = await TemperamentModel.findAll({
-    where
+    where,
+    include: {
+      model: BreedModel,
+      through: { attributes: [] }
+    }
   })
   return temperaments.map(temperament => temperament.toJSON())
 }

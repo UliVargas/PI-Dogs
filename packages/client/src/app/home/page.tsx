@@ -1,7 +1,6 @@
 import { BreedCard } from "@/components/breed-card"
 import { Filters } from '@/components/filters'
 import { api } from '@/api'
-import { Pagination } from '@/components/pagination'
 
 
 
@@ -12,8 +11,12 @@ export default async function HomePage({ searchParams: { search, temperament, so
     sort: string
   }
 }) {
-  const { raw: { temperaments } } = await api.temperament.getTemperaments()
-  let { raw: { breeds } } = await api.breed.getBreeds({ breedName: search, sort, temperament })
+  const breeds = await api.breed.getBreeds({ breedName: search, sort, temperament })
+  const temperaments = await api.temperament.getTemperaments(temperament)
+
+  console.log({temperaments});
+  
+  
   
   return (
     <div>
@@ -25,7 +28,7 @@ export default async function HomePage({ searchParams: { search, temperament, so
           ))
         }
       </div>
-      <Pagination totalPages={10} />
+      {/* <Pagination totalPages={10} /> */}
     </div>
   )
 }

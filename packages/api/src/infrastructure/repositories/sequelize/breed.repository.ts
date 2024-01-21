@@ -10,13 +10,13 @@ export const getAllBreedsService = async ({
   page,
   limit,
   sort = 'ASC',
-  temperamentName
+  temperament
 }: {
   name?: string,
   page: number,
   limit: number,
   sort: 'ASC' | 'DESC'
-  temperamentName: string
+  temperament: string
 }): Promise<BreedEntity[]> => {
   let where = {}
   if (name) {

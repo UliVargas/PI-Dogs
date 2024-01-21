@@ -2,8 +2,8 @@
 import { SearchBar } from './search-bar'
 import { Options, Select } from './select'
 import { Button } from './button'
-import { TemperamentEntity } from '@/app/interfaces/temperament-entity.interface'
 import { usePathname, useSearchParams, useRouter } from 'next/navigation'
+import { TemperamentEntity } from '@/app/interfaces/temperament-entity.interface'
 
 const sorted: Options[] = [
   {
@@ -15,7 +15,7 @@ const sorted: Options[] = [
     value: 'DESC'
   }
 ]
-export const Filters = ({ temperaments, selectOptions: { sort, temperament } }: { temperaments: TemperamentEntity[]; selectOptions: { sort: string; temperament: string } }) => {
+export const Filters = ({ temperaments, selectOptions: { sort, temperament } }: { temperaments: TemperamentEntity[];  selectOptions: { sort: string; temperament: string } }) => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -40,10 +40,10 @@ export const Filters = ({ temperaments, selectOptions: { sort, temperament } }: 
       </div>
       <div className='flex gap-5'>
         <div className='flex items-center gap-3'>
-          <Select label='Ordenar por:' options={sorted} defaultOption={sort ?? 'ASC'} />
+          <Select options={sorted} defaultOption={sort ?? 'ASC'} />
         </div>
         <div className='flex items-center gap-3'>
-          <Select label='Filtrar por Temperamento:' options={filtered} defaultOption={temperament} />
+          <Select options={filtered} defaultOption={temperament} />
           <Button onClick={deleteFilter}>Borrar Filtro</Button>
         </div>
       </div>

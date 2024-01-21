@@ -1,19 +1,24 @@
 'use client'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { ChangeEvent, FC } from 'react'
+import { ChangeEvent, FC, useEffect } from 'react'
 
 export interface Options {
   label: string
   value: string
 }
 
-export const Select: FC<{ label: string; options: Options[], defaultOption?: string }> = ({ label, options, defaultOption }) => {
+interface SelectProps {
+  options: Options[]
+  defaultOption?: string
+}
+
+export const Select: FC<SelectProps> = ({ options, defaultOption }) => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
+  const params = new URLSearchParams(Array.from(searchParams.entries()));
 
   const handleChange = (value: string) => {
-    const params = new URLSearchParams(Array.from(searchParams.entries()));
 
     switch (value) {
       case 'ASC':
@@ -28,13 +33,20 @@ export const Select: FC<{ label: string; options: Options[], defaultOption?: str
       case 'remove-filter':
         params.delete('temperament')
         break;
-      default:
+      default:{
+        params.delete('search')
         params.set('temperament', value)
         break;
+      }
     }
 
     replace(`${pathname}?${params.toString()}`)
   }
+
+  useEffect(() => {
+    params.set('sort', 'ASC')
+    replace(`${pathname}?${params.toString()}`)
+  }, [])
 
   return (
     <select
