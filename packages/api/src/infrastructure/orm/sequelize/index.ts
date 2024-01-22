@@ -14,6 +14,10 @@ const sequelize = new Sequelize(
   password,
   {
     dialect: 'postgres',
+    ssl: true,
+    dialectOptions: {
+      ssl: require
+    },
     ...rest
   }
 )

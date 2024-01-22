@@ -4,6 +4,7 @@ import { Dependencies } from '../../infrastructure/config/dependencies'
 export default (dependencies: Dependencies) => {
   const createUseCase = CreateUseCase(dependencies)
   const findAllUseCase = FindAllUseCase(dependencies)
+
   const findAll = async (req: Request, res: Response, next: NextFunction) => {
     const { name, page, limit } = req.query as { name: string, page: string, limit: string }
     res.req.body = await findAllUseCase({ name, page, limit })

@@ -8,13 +8,17 @@ import { BreedModel, BreedTemperamentModel, TemperamentModel } from './models/in
 
 export default async function Seed () {
   sequelize
-    .sync({ force: true })
+    .authenticate()
     .then(() => {
       logger.log('warn', 'Connection to the database has been established successfully.')
     })
     .catch((error) => {
       logger.error('Unable to connect to the database:', error)
     })
+
+  await TemperamentModel.destroy({ truncate: true, cascade: true })
+  await BreedModel.destroy({ truncate: true, cascade: true })
+  await BreedTemperamentModel.destroy({ truncate: true, cascade: true })
 
   const { data } = await axios.get<BreedAPI[]>(`${env.API_URL}?api_key=${env.API_KEY}`)
 
