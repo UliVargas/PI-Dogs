@@ -1,7 +1,6 @@
 import { BreedEntity } from '../../../core/entities/breed.entity'
 import { TemperamentEntity } from '../../../core/entities/temperament.entity'
-import { getAllTemperamentsService } from '../../../infrastructure/repositories/sequelize'
-import { getAllBreedsService } from '../../../infrastructure/repositories/sequelize/breed.repository'
+import { Dependencies } from '../../../infrastructure/config/dependencies'
 import { pagination } from '../../../infrastructure/utils/pagination'
 
 interface Response {
@@ -15,11 +14,11 @@ interface Response {
   }
 }
 
-export default async ({
+type FindAllBreeds = ({
   name,
-  page = '1',
-  limit = '10',
-  sort = 'ASC',
+  page,
+  limit,
+  sort,
   temperament
 }: {
   name?: string,
@@ -27,17 +26,25 @@ export default async ({
   limit: string,
   sort: 'ASC' | 'DESC'
   temperament: string
-}): Promise<Response> => {
+}) => Promise<Response>
+
+export default (dependencies: Dependencies): FindAllBreeds => async ({
+  name,
+  page = '1',
+  limit = '10',
+  sort = 'ASC',
+  temperament
+}) => {
   let breeds: BreedEntity[] = []
   let totalCount = 0
 
   if (temperament) {
-    const resp: any = await getAllTemperamentsService({ page: Number(page), limit: parseInt(limit, 10) || 10, name: temperament })
-    breeds = resp.temperaments?.flatMap((temperament: TemperamentEntity) => temperament.Breeds) ?? []
+    const { data } = await dependencies.temperamentRepository.findAll({ page: Number(page), limit: parseInt(limit, 10) || 10, sort: 'ASC', name: temperament })
+    breeds = data.flatMap((temperament: TemperamentEntity) => temperament.Breeds ?? [])
     totalCount = breeds.length
   } else {
-    const resp = await getAllBreedsService({ name, page: Number(page), limit: parseInt(limit, 10) || 10, sort, temperament })
-    breeds = resp.breeds
+    const resp = await dependencies.breedsRepository.findAll({ name, page: Number(page), limit: parseInt(limit, 10) || 10, sort, temperament })
+    breeds = resp.data
     totalCount = resp.count
   }
 

@@ -2,8 +2,8 @@ import sequelize from '.'
 import axios from 'axios'
 import { BreedAPI } from '../../../core/interfaces/breed.interface'
 import { env } from '../../config/env'
-import { breedAPIAdapter } from '../../adapters/breed.adapter'
-import { logger } from './utils/wingston'
+import { breedAPIAdapter } from '../../../interface/adapters/breed.adapter'
+import { logger } from '../../utils/wingston'
 import { BreedModel, BreedTemperamentModel, TemperamentModel } from './models/index.model'
 
 export default async function Seed () {

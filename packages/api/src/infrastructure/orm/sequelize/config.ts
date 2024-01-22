@@ -1,5 +1,5 @@
 import { env } from '../../config/env'
-import { logger } from './utils/wingston'
+import { logger } from '../../utils/wingston'
 
 const {
   DB_NAME,

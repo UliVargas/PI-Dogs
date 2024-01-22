@@ -4,6 +4,5 @@ export interface BreedEntity {
   height: string
   name: string
   life_span: string
-  Temperaments: string[]
   image: string
 }

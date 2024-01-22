@@ -1,13 +1,18 @@
-import { Router } from 'express'
-import breedsRouter from './breeds.routes'
-import temperamentsRouter from './temperament.routes'
-import { handlerContext } from '../../infrastructure/orm/sequelize/utils/handlerContext'
+import Router from 'express-promise-router'
+import BreedsRouter from './breeds.routes'
+import TemperamentsRouter from './temperament.routes'
+import { handlerContext } from '../../infrastructure/utils/handlerContext'
+import { Dependencies } from '../../infrastructure/config/dependencies'
 
-const router = Router()
+export default (dependencies: Dependencies) => {
+  const router = Router()
+  const breedsRouter = BreedsRouter(dependencies)
+  const temperamentsRouter = TemperamentsRouter(dependencies)
 
-router
-  .use('/breeds', breedsRouter)
-  .use('/temperaments', temperamentsRouter)
-  .use(handlerContext)
+  router
+    .use('/breeds', breedsRouter)
+    .use('/temperaments', temperamentsRouter)
+    .use(handlerContext)
 
-export default router
+  return router
+}

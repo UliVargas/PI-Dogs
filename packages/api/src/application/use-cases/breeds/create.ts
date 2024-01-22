@@ -1,6 +1,8 @@
 import { BreedEntity } from '../../../core/entities/breed.entity'
-import { createBreedService } from '../../../infrastructure/repositories/sequelize/breed.repository'
+import { CreateBreed as ICreateBreed } from '../../../core/interfaces/breed.interface'
+import { Dependencies } from '../../../infrastructure/config/dependencies'
 
-export default (breedPayload: BreedEntity) => {
-  return createBreedService(breedPayload)
+type CreateBreed = (breedPayload: ICreateBreed) => Promise<BreedEntity>
+export default (dependencies: Dependencies): CreateBreed => (payload) => {
+  return dependencies.breedsRepository.create(payload)
 }

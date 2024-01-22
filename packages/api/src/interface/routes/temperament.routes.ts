@@ -1,14 +1,18 @@
-import { Router } from 'express'
-import { createTemperament, getAllTemperaments } from '../controllers/temperaments.controller'
+import Router from 'express-promise-router'
+import TemperamentController from '../controllers/temperaments.controller'
+import { Dependencies } from '../../infrastructure/config/dependencies'
 
-const router = Router()
+export default (dependencies: Dependencies) => {
+  const router = Router()
+  const temperamentController = TemperamentController(dependencies)
 
-router
-  .get('/',
-    getAllTemperaments
-  )
-  .post('/',
-    createTemperament
-  )
+  router
+    .get('/',
+      temperamentController.findAll
+    )
+    .post('/',
+      temperamentController.create
+    )
 
-export default router
+  return router
+}

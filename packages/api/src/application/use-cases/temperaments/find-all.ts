@@ -1,5 +1,5 @@
 import { TemperamentEntity } from '../../../core/entities/temperament.entity'
-import { getAllTemperamentsService } from '../../../infrastructure/repositories/sequelize/temperament.repository'
+import { Dependencies } from '../../../infrastructure/config/dependencies'
 import { pagination } from '../../../infrastructure/utils/pagination'
 
 interface Response {
@@ -13,16 +13,22 @@ interface Response {
   }
 }
 
-export default async ({
+type FindAllTemperaments = ({
   name,
-  page = '1',
-  limit = '10'
+  page,
+  limit
 }: {
   page: string,
   limit: string
   name?: string,
-}): Promise<Response> => {
-  const { temperaments, count: totalCount } = await getAllTemperamentsService({ name, page: Number(page), limit: parseInt(limit, 10) || 10 })
+}) => Promise<Response>
+
+export default (dependencies: Dependencies): FindAllTemperaments => async ({
+  name,
+  page = '1',
+  limit = '10'
+}) => {
+  const { data, count: totalCount } = await dependencies.temperamentRepository.findAll({ name, page: Number(page), sort: 'ASC', limit: parseInt(limit, 10) || 10 })
   const {
     totalPages,
     previousPage,
@@ -41,6 +47,6 @@ export default async ({
       nextPage,
       totalPages
     },
-    temperaments
+    temperaments: data
   }
 }

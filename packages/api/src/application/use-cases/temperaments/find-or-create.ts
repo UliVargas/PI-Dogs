@@ -1,11 +1,8 @@
 import { TemperamentEntity } from '../../../core/entities/temperament.entity'
-import { findOrCreateTemperamentService } from '../../../infrastructure/repositories/sequelize/temperament.repository'
+import { Dependencies } from '../../../infrastructure/config/dependencies'
 
-interface Response {
-  created: boolean
-  temperament: TemperamentEntity
-}
+type CreateTemperament = (name: string) => Promise<TemperamentEntity>
 
-export default (name: string): Promise<Response> => {
-  return findOrCreateTemperamentService(name)
+export default (dependencies: Dependencies): CreateTemperament => (name) => {
+  return dependencies.temperamentRepository.create(name)
 }

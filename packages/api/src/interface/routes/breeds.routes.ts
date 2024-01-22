@@ -1,17 +1,21 @@
-import { Router } from 'express'
-import { createBreed, findBreedById, getAllBreeds } from '../controllers/breeds.controller'
+import Router from 'express-promise-router'
+import BreedControllers from '../controllers/breeds.controller'
+import { Dependencies } from '../../infrastructure/config/dependencies'
 
 const router = Router()
+export default (dependencies: Dependencies) => {
+  const breedControllers = BreedControllers(dependencies)
 
-router
-  .get('/',
-    getAllBreeds
-  )
-  .post('/',
-    createBreed
-  )
-  .get('/:breedId',
-    findBreedById
-  )
+  router
+    .get('/',
+      breedControllers.findAll
+    )
+    .post('/',
+      breedControllers.create
+    )
+    .get('/:breedId',
+      breedControllers.findOne
+    )
 
-export default router
+  return router
+}

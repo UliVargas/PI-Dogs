@@ -1,3 +1,5 @@
+import { BreedEntity } from '../entities/breed.entity'
+
 export interface Eight {
   imperial: string
   metric: string
@@ -22,4 +24,8 @@ export interface BreedAPI {
   origin: string
   reference_image_id: string
   image: Image
+}
+
+export interface CreateBreed extends BreedEntity {
+  Temperaments: string[]
 }

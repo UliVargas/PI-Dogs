@@ -6,11 +6,11 @@
   "scripts": {
     "alterdb": "ts-node -r dotenv/config ./src/infrastructure/orm/sequelize/alterdb.ts dotenv_config_path=.env",
     "build": "tsc",
-    "dev": "nodemon -r dotenv/config ./src/infrastructure/server/index.ts dotenv_config_path=.env",
+    "dev": "nodemon -r dotenv/config ./src/infrastructure/webserver/index.ts dotenv_config_path=.env",
     "lint:fix": "eslint \"**/*.ts\" --fix",
     "lint": "eslint \"**/*.ts\"",
     "seed": "ts-node -r dotenv/config ./src/infrastructure/orm/sequelize/seed.ts dotenv_config_path=.env",
-    "start": "nodemon -r dotenv/config ./dist/infrastructure/server/index.js dotenv_config_path=.env",
+    "start": "nodemon -r dotenv/config ./dist/infrastructure/webserver/index.js dotenv_config_path=.env",
     "test:co": "jest --coverage",
     "test": "jest"
   },
@@ -43,6 +43,7 @@
     "debug": "^4.3.4",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-promise-router": "^4.1.1",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.31.0",

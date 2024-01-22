@@ -2,10 +2,9 @@ import { Model, Optional, STRING, UUID, UUIDV4 } from 'sequelize'
 import sequelize from '..'
 import { BreedEntity } from '../../../../core/entities/breed.entity'
 
-type BreedModelAttributes = Optional<BreedEntity, 'Temperaments'>
-type BreedCreationAttributes = Optional<BreedEntity, 'id' | 'image' | 'Temperaments'>
+type BreedCreationAttributes = Optional<BreedEntity, 'id' | 'image'>
 
-class Breed extends Model<BreedModelAttributes, BreedCreationAttributes> {
+class Breed extends Model<BreedEntity, BreedCreationAttributes> {
   declare id: string
   declare name: string
   declare height: string

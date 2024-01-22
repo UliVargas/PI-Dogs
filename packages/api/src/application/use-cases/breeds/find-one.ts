@@ -1,6 +1,7 @@
 import { BreedEntity } from '../../../core/entities/breed.entity'
-import { findBreedByIdService } from '../../../infrastructure/repositories/sequelize/breed.repository'
+import { Dependencies } from '../../../infrastructure/config/dependencies'
 
-export default (id: string): Promise<BreedEntity> => {
-  return findBreedByIdService(id)
+type FindOneBreed = (id: string) => Promise<BreedEntity | null>
+export default (dependencies: Dependencies): FindOneBreed => async (id: string) => {
+  return await dependencies.breedsRepository.findOne(id)
 }

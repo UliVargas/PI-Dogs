@@ -1,52 +1,66 @@
 import { Op, WhereOptions } from 'sequelize'
 import { TemperamentEntity } from '../../../core/entities/temperament.entity'
 import { BreedModel, TemperamentModel } from '../../orm/sequelize/models/index.model'
-import { capitalizeFirstLetter } from '../../orm/sequelize/utils/capitalizeFirstLetter'
+import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
+import { TemperamentRepository } from '../../../core/repositories/temperament.repository'
 
-export const getAllTemperamentsService = async ({
-  name
-}: {
-  page: number,
-  limit: number
-  name?: string,
-}): Promise<{ temperaments: TemperamentEntity[], count: number }> => {
-  let where: WhereOptions = {}
+class TemperamentSequelizeRepository implements TemperamentRepository {
+  async findAll ({
+    name,
+    page,
+    limit,
+    sort = 'ASC'
+  }: {
+    name?: string,
+    page: number,
+    limit: number,
+    sort: 'ASC' | 'DESC'
+  }): Promise<{ data: TemperamentEntity[], count: number }> {
+    let where: WhereOptions = {}
 
-  if (name) {
-    where = {
-      name: {
-        [Op.iLike]: `%${name}%`
+    if (name) {
+      where = {
+        name: {
+          [Op.iLike]: `%${name}%`
+        }
       }
     }
+
+    const temperaments = await TemperamentModel.findAll({
+      where,
+      include: {
+        model: BreedModel,
+        through: { attributes: [] }
+      }
+    })
+
+    const count = await TemperamentModel.count({
+      where
+    })
+
+    return {
+      data: temperaments.map(temperament => temperament.toJSON()),
+      count
+    }
   }
 
-  const temperaments = await TemperamentModel.findAll({
-    where,
-    include: {
-      model: BreedModel,
-      through: { attributes: [] }
-    }
-  })
+  async create (payload: string): Promise<TemperamentEntity> {
+    const [temperament] = await TemperamentModel.findOrCreate({
+      where: {
+        name: capitalizeFirstLetter(payload)
+      }
+    })
 
-  const count = await TemperamentModel.count({
-    where
-  })
+    return temperament
+  }
 
-  return {
-    temperaments: temperaments.map(temperament => temperament.toJSON()),
-    count
+  async findOne (payload: string): Promise<TemperamentEntity | null> {
+    return await TemperamentModel.findOne({
+      where: {
+        id: payload
+      }
+    })
   }
 }
 
-export const findOrCreateTemperamentService = async (name: string): Promise<{ created: boolean, temperament: Omit<TemperamentEntity, 'Breeds'> }> => {
-  const [temperament, created] = await TemperamentModel.findOrCreate({
-    where: {
-      name: capitalizeFirstLetter(name)
-    }
-  })
-
-  return {
-    created,
-    temperament
-  }
-}
+export default TemperamentSequelizeRepository
