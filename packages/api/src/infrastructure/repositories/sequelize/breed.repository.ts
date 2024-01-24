@@ -6,9 +6,7 @@ import { Op } from 'sequelize'
 import { BreedRepository } from '../../../core/repositories/breed.repository'
 import { CreateBreed } from '../../../core/interfaces/breed.interface'
 import BreedTemperament from '../../orm/sequelize/models/breed-temperament.model'
-import TemperamentSequelizeRepository from './temperament.repository'
 
-const temperamentRepository = new TemperamentSequelizeRepository()
 class BreedSequelizeRepository implements BreedRepository {
   async findAll ({
     name,
@@ -59,11 +57,6 @@ class BreedSequelizeRepository implements BreedRepository {
       name: capitalizeFirstLetter(payload.name)
     })
 
-    if (payload.Temperaments.length > 0) {
-      payload.Temperaments.forEach(async (temperament) => {
-        await this.addTemperamentToBreed(temperament, breed.id)
-      })
-    }
     return breed.toJSON()
   }
 
@@ -79,12 +72,11 @@ class BreedSequelizeRepository implements BreedRepository {
     }).then(breed => breedDBAdapter(breed?.toJSON()))
   }
 
-  async addTemperamentToBreed (temperamentName: string, breedId: string): Promise<BreedTemperament> {
-    const temperament = await temperamentRepository.create(temperamentName)
+  async addTemperamentToBreed (breedId: string, temperamentId: string): Promise<BreedTemperament> {
     const [breedTemperament] = await BreedTemperamentModel.findOrCreate({
       where: {
         BreedId: breedId,
-        TemperamentId: temperament.id
+        TemperamentId: temperamentId
       }
     })
     return breedTemperament

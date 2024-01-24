@@ -21,11 +21,11 @@ type FindAllBreeds = ({
   sort,
   temperament
 }: {
-  name?: string,
   page: string,
   limit: string,
   sort: 'ASC' | 'DESC'
-  temperament: string
+  name?: string,
+  temperament?: string
 }) => Promise<Response>
 
 export default (dependencies: Dependencies): FindAllBreeds => async ({

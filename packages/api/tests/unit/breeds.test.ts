@@ -1,24 +1,19 @@
 import { jest, describe, it, expect } from '@jest/globals'
-import { GetAllBreeds, FindBreedById, CreateBreed } from '../../src/application/use-cases/breeds'
-import { breedCountService, getAllBreedsService, findBreedByIdService, createBreedService } from '../../src/infrastructure/repositories/sequelize/breed.repository'
+import { CreateUseCase, FindAllUseCase, FindOneUseCase } from '../../src/application/use-cases/breeds'
 import { breed } from '../mocks/breed'
-
-jest.mock('../../src/infrastructure/repositories/sequelize/breed.repository')
+import { dependencies } from '../dependencies'
 
 describe('breedService', () => {
-  describe('GetAll', () => {
+  describe('FindAll', () => {
+    const findAllBreeds = FindAllUseCase(dependencies)
     it('Debería devolver un array con todas las razas que existan', async () => {
-      const breedCountMock = (breedCountService as jest.MockedFunction<typeof breedCountService>).mockResolvedValue(1)
-      const getAllBreedsMock = (getAllBreedsService as jest.MockedFunction<typeof getAllBreedsService>).mockResolvedValue([breed])
-
-      const result = await GetAllBreeds({
+      dependencies.breedsRepository.findAll = (jest.fn() as jest.MockedFunction<typeof dependencies.breedsRepository.findAll>).mockResolvedValue({ data: [breed], count: 1 })
+      const result = await findAllBreeds({
         limit: '10',
         page: '1',
         sort: 'ASC'
       })
-
-      expect(breedCountMock).toHaveBeenCalled()
-      expect(getAllBreedsMock).toHaveBeenCalledWith({
+      expect(dependencies.breedsRepository.findAll).toHaveBeenCalledWith({
         page: 1,
         limit: 10,
         sort: 'ASC'
@@ -36,17 +31,13 @@ describe('breedService', () => {
     })
 
     it('Debería devolver un array vacío si no hay razas', async () => {
-      const breedCountMock = (breedCountService as jest.MockedFunction<typeof breedCountService>).mockResolvedValue(0)
-      const getAllBreedsMock = (getAllBreedsService as jest.MockedFunction<typeof getAllBreedsService>).mockResolvedValue([])
-
-      const result = await GetAllBreeds({
+      dependencies.breedsRepository.findAll = (jest.fn() as jest.MockedFunction<typeof dependencies.breedsRepository.findAll>).mockResolvedValue({ data: [], count: 0 })
+      const result = await findAllBreeds({
         limit: '10',
         page: '1',
         sort: 'ASC'
       })
-
-      expect(breedCountMock).toHaveBeenCalled()
-      expect(getAllBreedsMock).toHaveBeenCalledWith({
+      expect(dependencies.breedsRepository.findAll).toHaveBeenCalledWith({
         page: 1,
         limit: 10,
         sort: 'ASC'
@@ -64,32 +55,34 @@ describe('breedService', () => {
     })
   })
 
-  describe('GetOne', () => {
+  describe('FindOne', () => {
+    const findOneUseCase = FindOneUseCase(dependencies)
     it('Debería obtener una raza por id', async () => {
-      const findBreedMock = (findBreedByIdService as jest.MockedFunction<typeof findBreedByIdService>).mockResolvedValue(breed)
-
-      const result = await FindBreedById(breed.id)
-
-      expect(findBreedMock).toHaveBeenCalledWith(breed.id)
+      dependencies.breedsRepository.findOne = (jest.fn() as jest.MockedFunction<typeof dependencies.breedsRepository.findOne>).mockResolvedValue(breed)
+      const result = await findOneUseCase(breed.id)
+      expect(dependencies.breedsRepository.findOne).toHaveBeenCalledWith(breed.id)
       expect(result).toEqual(breed)
     })
     it('Debería retornar un objeto vacio si una raza no existe', async () => {
-      const findBreedMock = (findBreedByIdService as jest.MockedFunction<typeof findBreedByIdService>).mockResolvedValue({})
-
-      const result = await FindBreedById(breed.id)
-
-      expect(findBreedMock).toHaveBeenCalledWith(breed.id)
-      expect(result).toEqual({})
+      dependencies.breedsRepository.findOne = (jest.fn() as jest.MockedFunction<typeof dependencies.breedsRepository.findOne>).mockResolvedValue(null)
+      const result = await findOneUseCase(breed.id)
+      expect(dependencies.breedsRepository.findOne).toHaveBeenCalledWith(breed.id)
+      expect(result).toEqual(null)
     })
   })
 
   describe('Create', () => {
+    const createBreed = CreateUseCase(dependencies)
     it('Debería crear una nueva raza y retornarla', async () => {
-      const createBreedMock = (createBreedService as jest.MockedFunction<typeof createBreedService>).mockResolvedValue(breed)
+      dependencies.breedsRepository.create = (jest.fn() as jest.MockedFunction<typeof dependencies.breedsRepository.create>).mockResolvedValue(breed)
+      dependencies.temperamentRepository.create = (jest.fn() as jest.MockedFunction<typeof dependencies.temperamentRepository.create>).mockResolvedValue({ id: 'temp123', name: 'Happy' })
+      dependencies.breedsRepository.addTemperamentToBreed = (jest.fn() as jest.MockedFunction<typeof dependencies.breedsRepository.addTemperamentToBreed>).mockResolvedValue({ BreedId: 'breed123', TemperamentId: 'temp123' })
 
-      const result = await CreateBreed(breed)
+      const result = await createBreed({ ...breed, Temperaments: ['Happy'] })
 
-      expect(createBreedMock).toHaveBeenCalledWith(breed)
+      expect(dependencies.breedsRepository.create).toHaveBeenCalledWith({ ...breed, Temperaments: ['Happy'] })
+      expect(dependencies.temperamentRepository.create).toHaveBeenCalledWith('Happy')
+      expect(dependencies.breedsRepository.addTemperamentToBreed).toHaveBeenCalledWith('breed123', 'temp123')
       expect(result).toEqual(breed)
     })
   })
