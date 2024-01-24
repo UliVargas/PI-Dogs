@@ -1,5 +1,5 @@
-import { BreedEntity } from '../src/core/entities/breed.entity'
-import { TemperamentEntity } from '../src/core/entities/temperament.entity'
+import { BreedEntity } from '../src/domain/entities/breed.entity'
+import { TemperamentEntity } from '../src/domain/entities/temperament.entity'
 import { Dependencies } from '../src/infrastructure/config/dependencies'
 import BreedTemperament from '../src/infrastructure/orm/sequelize/models/breed-temperament.model'
 export const dependencies: Dependencies = {

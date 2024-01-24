@@ -1,5 +1,5 @@
-import { BreedRepository } from '../../core/repositories/breed.repository'
-import { TemperamentRepository } from '../../core/repositories/temperament.repository'
+import { BreedRepository } from '../../ports/repositories/breed.repository'
+import { TemperamentRepository } from '../../ports/repositories/temperament.repository'
 import { BreedSequelizeRepository } from '../repositories/sequelize'
 import TemperamentSequelizeRepository from '../repositories/sequelize/temperament.repository'
 

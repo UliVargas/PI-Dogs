@@ -1,4 +1,4 @@
-import { BreedEntity } from '../../../core/entities/breed.entity'
+import { BreedEntity } from '../../entities/breed.entity'
 import { Dependencies } from '../../../infrastructure/config/dependencies'
 
 type FindOneBreed = (id: string) => Promise<BreedEntity | null>

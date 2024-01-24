@@ -1,4 +1,4 @@
-import { BreedEntity } from '../entities/breed.entity'
+import { BreedEntity } from '../../domain/entities/breed.entity'
 
 export interface Eight {
   imperial: string

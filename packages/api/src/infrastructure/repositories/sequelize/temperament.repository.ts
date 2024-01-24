@@ -1,8 +1,8 @@
 import { Op, WhereOptions } from 'sequelize'
-import { TemperamentEntity } from '../../../core/entities/temperament.entity'
+import { TemperamentEntity } from '../../../domain/entities/temperament.entity'
 import { BreedModel, TemperamentModel } from '../../orm/sequelize/models/index.model'
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
-import { TemperamentRepository } from '../../../core/repositories/temperament.repository'
+import { TemperamentRepository } from '../../../ports/repositories/temperament.repository'
 
 class TemperamentSequelizeRepository implements TemperamentRepository {
   async findAll ({

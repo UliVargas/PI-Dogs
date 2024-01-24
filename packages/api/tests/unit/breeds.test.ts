@@ -1,11 +1,11 @@
 import { jest, describe, it, expect } from '@jest/globals'
-import { CreateUseCase, FindAllUseCase, FindOneUseCase } from '../../src/application/use-cases/breeds'
+import { CreateService, FindAllService, FindOneService } from '../../src/domain/services/breeds'
 import { breed } from '../mocks/breed'
 import { dependencies } from '../dependencies'
 
 describe('breedService', () => {
   describe('FindAll', () => {
-    const findAllBreeds = FindAllUseCase(dependencies)
+    const findAllBreeds = FindAllService(dependencies)
     it('Debería devolver un array con todas las razas que existan', async () => {
       dependencies.breedsRepository.findAll = (jest.fn() as jest.MockedFunction<typeof dependencies.breedsRepository.findAll>).mockResolvedValue({ data: [breed], count: 1 })
       const result = await findAllBreeds({
@@ -56,7 +56,7 @@ describe('breedService', () => {
   })
 
   describe('FindOne', () => {
-    const findOneUseCase = FindOneUseCase(dependencies)
+    const findOneUseCase = FindOneService(dependencies)
     it('Debería obtener una raza por id', async () => {
       dependencies.breedsRepository.findOne = (jest.fn() as jest.MockedFunction<typeof dependencies.breedsRepository.findOne>).mockResolvedValue(breed)
       const result = await findOneUseCase(breed.id)
@@ -72,7 +72,7 @@ describe('breedService', () => {
   })
 
   describe('Create', () => {
-    const createBreed = CreateUseCase(dependencies)
+    const createBreed = CreateService(dependencies)
     it('Debería crear una nueva raza y retornarla', async () => {
       dependencies.breedsRepository.create = (jest.fn() as jest.MockedFunction<typeof dependencies.breedsRepository.create>).mockResolvedValue(breed)
       dependencies.temperamentRepository.create = (jest.fn() as jest.MockedFunction<typeof dependencies.temperamentRepository.create>).mockResolvedValue({ id: 'temp123', name: 'Happy' })

@@ -1,4 +1,4 @@
-import { BreedEntity } from '../../src/core/entities/breed.entity'
+import { BreedEntity } from '../../src/domain/entities/breed.entity'
 
 export const breed: BreedEntity = {
   id: 'breed123',

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { FindAllUseCase, FindOneUseCase, CreateUseCase } from '../../application/use-cases/breeds'
+import { FindAllUseCase, FindOneUseCase, CreateUseCase } from '../../domain/services/breeds'
 import { Dependencies } from '../../infrastructure/config/dependencies'
 
 export default (dependencies: Dependencies) => {

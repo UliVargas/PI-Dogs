@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { CreateUseCase, FindAllUseCase } from '../../application/use-cases/temperaments'
+import { CreateUseCase, FindAllUseCase } from '../../domain/services/temperaments'
 import { Dependencies } from '../../infrastructure/config/dependencies'
 export default (dependencies: Dependencies) => {
   const createUseCase = CreateUseCase(dependencies)

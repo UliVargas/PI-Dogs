@@ -1,5 +1,5 @@
-import { BreedEntity } from '../../../core/entities/breed.entity'
-import { CreateBreed as ICreateBreed } from '../../../core/interfaces/breed.interface'
+import { BreedEntity } from '../../entities/breed.entity'
+import { CreateBreed as ICreateBreed } from '../../../infrastructure/interfaces/breed.interface'
 import { Dependencies } from '../../../infrastructure/config/dependencies'
 
 type CreateBreed = (breedPayload: ICreateBreed) => Promise<BreedEntity>

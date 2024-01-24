@@ -1,10 +1,10 @@
 import { BreedModel, BreedTemperamentModel, TemperamentModel } from '../../orm/sequelize/models/index.model'
-import { breedDBAdapter } from '../../../interface/adapters/breed.adapter'
-import { BreedEntity } from '../../../core/entities/breed.entity'
+import { breedDBAdapter } from '../../../adapters/serializers/breed.adapter'
+import { BreedEntity } from '../../../domain/entities/breed.entity'
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
 import { Op } from 'sequelize'
-import { BreedRepository } from '../../../core/repositories/breed.repository'
-import { CreateBreed } from '../../../core/interfaces/breed.interface'
+import { BreedRepository } from '../../../ports/repositories/breed.repository'
+import { CreateBreed } from '../../interfaces/breed.interface'
 import BreedTemperament from '../../orm/sequelize/models/breed-temperament.model'
 
 class BreedSequelizeRepository implements BreedRepository {

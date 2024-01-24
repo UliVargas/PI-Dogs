@@ -1,4 +1,4 @@
-import { TemperamentEntity } from '../../../core/entities/temperament.entity'
+import { TemperamentEntity } from '../../entities/temperament.entity'
 import { Dependencies } from '../../../infrastructure/config/dependencies'
 
 type CreateTemperament = (name: string) => Promise<TemperamentEntity>

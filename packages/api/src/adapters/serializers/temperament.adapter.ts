@@ -1,4 +1,4 @@
-import { BreedAPI } from '../../core/interfaces/breed.interface'
+import { BreedAPI } from '../../infrastructure/interfaces/breed.interface'
 import { capitalizeFirstLetter } from '../../infrastructure/utils/capitalizeFirstLetter'
 
 export const breedAPIAdapter = (breed: BreedAPI) => {

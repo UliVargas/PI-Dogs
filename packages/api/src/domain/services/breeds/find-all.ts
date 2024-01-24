@@ -1,5 +1,5 @@
-import { BreedEntity } from '../../../core/entities/breed.entity'
-import { TemperamentEntity } from '../../../core/entities/temperament.entity'
+import { BreedEntity } from '../../entities/breed.entity'
+import { TemperamentEntity } from '../../entities/temperament.entity'
 import { Dependencies } from '../../../infrastructure/config/dependencies'
 import { pagination } from '../../../infrastructure/utils/pagination'
 
